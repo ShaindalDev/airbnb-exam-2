@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 //pages
 import Home from "./pages/Home";
 import RoomDetails from "./pages/RoomDetails";
+import SignIn from './pages/SignIn';
 
 // react router
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/room/:id',
     element: <RoomDetails />
+  },
+  {
+    path: '/login',
+    element: <SignIn />
   },
   
 ]);

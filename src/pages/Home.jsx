@@ -5,11 +5,6 @@ import BookForm from "../components/BookForm";
 import HeroSlider from "../components/HeroSlider";
 
 
-//api imports
-import useFetch from "../hooks/useFetch";
-import { API_URL, venues } from "../utils/constants";
-
-
 const Home = () => {
  useEffect(() => {
   document.title = "Holidaze | Home";

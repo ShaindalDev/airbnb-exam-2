@@ -6,7 +6,7 @@ import { BsArrowsFullscreen, BsPeople } from "react-icons/bs";
 
 const Venue = ({ venue }) => {
   //destructure venue
-  const { id, name, image, size, maxPerson, description, price } = venue;
+  const { id, name, image, size, maxGuests, description, price } = venue;
   return (
     <div className="bg-white shadow-2xl min-h-[500px] group">
       {/* img */}
@@ -40,7 +40,7 @@ const Venue = ({ venue }) => {
             </div>
             <div className="flex gap-x-1">
               <div>Max people</div>
-              <div>{maxPerson}</div>
+              <div>{maxGuests}</div>
             </div>
           </div>
         </div>

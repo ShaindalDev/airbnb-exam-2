@@ -17,11 +17,12 @@ const RoomProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     const getVenues = async () => {
       try {
         const response = await api.get('/venues');
         setVenues(response.data);
+        // console.log(response.data)
       } catch (err) {
         setError(err);
         if (err.response) {
@@ -37,7 +38,7 @@ const RoomProvider = ({ children }) => {
 
     }
     setTotal(Number(adults[0]) + Number(kids[0]));
-    // getVenues();
+    getVenues();
   });
 
   const handleClick = (e) => {
@@ -45,7 +46,7 @@ const RoomProvider = ({ children }) => {
     setLoading(true);
     //filter venues based on total (people)
     const newVenues = venues.filter((venue) => {
-      return total <= venue.maxPerson;
+      return total <= venue.maxGuests;
     });
     setTimeout(() => {
       setVenues(newVenues);
