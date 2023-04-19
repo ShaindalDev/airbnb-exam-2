@@ -1,17 +1,20 @@
-import React from 'react';
-import LogoWhite from '../assets/img/logo-white.svg';
-
+import React from "react";
+import LogoWhite from "../assets/img/logo-white.svg";
 
 const Footer = () => {
-  return <footer className='bg-primary py-12'>
-    <div className='container mx-auto text-white flex justify-between'>
-      <a href='/'>
-        <img src={LogoWhite} alt='' />
+  return (
+    <footer className="bg-primary py-12 static bottom-0">
+      <div className="mx-auto max-w-7xl px-6 py-12 justify-between md:flex md:items-center md:justify-between lg:px-8 text-white flex">
+        <a href="/">
+          <img src={LogoWhite} alt="" />
         </a>
-      
-      Copyright &copy; 2023. All rights reserved
-    </div>
-  </footer>;
+        <div>
+        <p class="text-center text-xs leading-5 text-white">&copy; 2023 Johnsen-codes.no, Inc. All rights reserved.</p>
+      </div>
+        
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

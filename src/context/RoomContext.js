@@ -38,7 +38,7 @@ const RoomProvider = ({ children }) => {
 
     }
     setTotal(Number(adults[0]) + Number(kids[0]));
-    getVenues();
+    // getVenues();
   });
 
   const handleClick = (e) => {

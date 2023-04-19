@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import RoomDetails from "./pages/RoomDetails";
 import SignIn from './pages/SignIn';
+import Register from './pages/Register';
 
 // react router
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <SignIn />
+  },
+  {
+    path: '/register',
+    element: <Register />
   },
   
 ]);
