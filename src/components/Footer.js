@@ -9,7 +9,7 @@ const Footer = () => {
           <img src={LogoWhite} alt="" />
         </a>
         <div>
-        <p class="text-center text-xs leading-5 text-white">&copy; 2023 Johnsen-codes.no, Inc. All rights reserved.</p>
+        <p className="text-center text-xs leading-5 text-white">&copy; 2023 Johnsen-codes.no, Inc. All rights reserved.</p>
       </div>
         
       </div>
