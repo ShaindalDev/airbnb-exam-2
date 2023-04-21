@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 //context
-import { VenueContext } from '../context/RoomContext';
+import { VenueContext } from '../context/VenueContext';
 //components
 import Venue from '../components/Room';
 //Loader

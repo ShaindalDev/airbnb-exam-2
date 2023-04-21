@@ -6,14 +6,14 @@ import { BsArrowsFullscreen, BsPeople } from "react-icons/bs";
 
 const Venue = ({ venue }) => {
   //destructure venue
-  const { id, name, image, size, maxGuests, description, price } = venue;
+  const { id, name, media, size, maxGuests, description, price } = venue;
   return (
     <div className="bg-white shadow-2xl min-h-[500px] group">
       {/* img */}
       <div className="overflow-hidden">
         <img
           className="group-hover:scale-110 transition-all duration-300 w-full"
-          src={image}
+          src={media}
           alt=""
         />
       </div>

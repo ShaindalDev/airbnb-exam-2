@@ -10,7 +10,7 @@ import CheckOut from "../components/CheckOut";
 import ScrollToTop from "../components/ScrollToTop";
 
 //context
-import { VenueContext } from "../context/RoomContext";
+import { VenueContext } from "../context/VenueContext";
 //icons
 import { FaCheck } from "react-icons/fa";
 

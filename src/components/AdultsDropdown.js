@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 //room context
-import { VenueContext } from "../context/RoomContext";
+import { VenueContext } from "../context/VenueContext";
 // headless ui Menu
 import { Menu } from "@headlessui/react";
 //icons
