@@ -68,12 +68,12 @@ const RegisterForm = () => {
   return (
     <>
       <section className="py-24">
-        <div className=" container mx-auto lg:px-0 bg-accent shadow-xl rounded">
+        <div className=" container mx-auto lg:px-0 bg-white shadow-2xl">
           <div className="mx-auto py-8">
-            <h1 className="text-2xl font-bold mb-6 text-center">Register</h1>
+            <h1 className="mt-10 text-center text-2xl font-primary-bold leading-9 tracking-[1.5px] text-black">Register</h1>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="w-full max-w-sm mx-auto bg-white p-8 rounded shadow-md"
+              className="w-full max-w-sm mx-auto bg-white p-8"
             >
                 {loginError && (
                     <div className="bg-white py-4 px-8 text-red-500 mb-2 border-2 border-solid">Error: Values not valid</div>
@@ -148,7 +148,7 @@ const RegisterForm = () => {
                 {/*put router link here*/}
                 <Link
                   to={`/signIn`}
-                  className="font-semibold leading-6 text-white hover:text-slate-300"
+                  className="font-semibold leading-6 text-blue-500 hover:text-blue-800"
                 >
                   Sign In here
                 </Link>

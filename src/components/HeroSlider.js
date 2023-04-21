@@ -6,9 +6,9 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 // required modules
 import { EffectFade, Autoplay } from "swiper";
-import Img1 from "../assets/img/heroSlider/1.jpg";
-import Img2 from "../assets/img/heroSlider/2.jpg";
-import Img3 from "../assets/img/heroSlider/3.jpg";
+import Img1 from "../assets/img/heroSlider/houseWinter.jpg";
+import Img2 from "../assets/img/heroSlider/modern.jpg";
+import Img3 from "../assets/img/heroSlider/luxuryHouse.jpg";
 
 const slides = [
   {
@@ -33,7 +33,7 @@ const HeroSlider = () => {
       modules={[EffectFade, Autoplay]}
       effect={"fade"}
       loop={true}
-      autoplay={{ delay: 3000, disableOnInteraction: false, }}
+      autoplay={{ delay: 4000, disableOnInteraction: false, }}
       className="heroSlider h-[600px] lg:h-[860px]"
     >
       {slides.map((slide, index) => {

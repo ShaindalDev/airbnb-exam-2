@@ -67,10 +67,11 @@ const SignInForm = () => {
   return (
     <>
     <section className="py-24">
-    <div className="container mx-auto lg:px-0 bg-accent shadow-xl rounded">
+    <div className="container mx-auto lg:px-0 bg-white shadow-2xl">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-50">
+          <h2 className="mt-10 text-center text-2xl font-primary-bold leading-9 tracking-[1.5px] text-black">
+          
             Sign in to your account
           </h2>
         </div>
@@ -133,7 +134,7 @@ const SignInForm = () => {
 
           <p className="mt-10 text-center text-sm text-gray-300">
             Not a member?{" "}
-            <Link to={'/register'} className="font-semibold leading-6 text-white hover:text-blue-700">
+            <Link to={'/register'} className="font-semibold leading-6 text-blue-500 hover:text-blue-800">
                Signup for a new account 
             </Link>
           </p>

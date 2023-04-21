@@ -12,8 +12,8 @@ const Venue = ({ venue }) => {
       {/* img */}
       <div className="overflow-hidden">
         <img
-          className="group-hover:scale-110 transition-all duration-300 w-full"
-          src={media}
+          className="group-hover:scale-110 transition-all duration-300 w-full aspect-[4/3]"
+          src={media[0]}
           alt=""
         />
       </div>
