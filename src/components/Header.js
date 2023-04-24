@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 //logo
-import LogoDark from "../assets/img/logo-dark copy.svg";
-import LogoWhiteTest from "../assets/img/logo-white copy.svg";
+import LogoDark from "../assets/img/logo-dark.svg";
+import LogoWhite from "../assets/img/logo-white.svg";
 const Header = () => {
   const [header, setHeader] = useState(false);
   useEffect(() => {
@@ -21,7 +21,7 @@ const Header = () => {
           {header ? (
             <img className="w-[160px]" src={LogoDark} />
           ) : (
-            <img className="w-[160px]" src={LogoWhiteTest} />
+            <img className="w-[160px]" src={LogoWhite} />
           )}
         </a>
 
@@ -29,8 +29,8 @@ const Header = () => {
           <a href="/" className="hover:text-accent transition">
             Home
           </a>
-          <a href="" className="hover:text-accent transition">
-            Venues
+          <a href="/profile" className="hover:text-accent transition">
+            Profile
           </a>
           <a href="/login" className="hover:text-accent transition">
             LOGIN
