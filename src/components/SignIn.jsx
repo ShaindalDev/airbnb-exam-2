@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useForm } from "react-hook-form";
+import useAuth from '../hooks/useAuth';
+import { set, useForm } from "react-hook-form";
 
 //components import
 import AuthContext from "../context/authContext";
@@ -66,7 +67,7 @@ const SignInForm = () => {
 
   return (
     <>
-    <section className="py-24">
+    <section className="mb-25 z-50 -top-12">
     <div className="container mx-auto lg:px-0 bg-white shadow-2xl">
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -128,7 +129,7 @@ const SignInForm = () => {
             </div>
 
             <div className="input-wrapper">
-                <button className="focus-shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none">{submit ? "Registrating..." : "Register"}</button>
+                <button className="focus-shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none">{submit ? "Loging in..." : "Login"}</button>
               </div>
           </form>
 

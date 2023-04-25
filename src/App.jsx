@@ -9,9 +9,11 @@ import Home from "./pages/Home";
 import RoomDetails from "./pages/RoomDetails";
 import SignIn from './pages/SignIn';
 import Register from './pages/Register';
-
+import Profile from './pages/Profile';
+import Contact from './pages/Contact';
 // react router
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
     path: '/register',
     element: <Register />
   },
+  {
+    path: '/profile',
+    element: <Profile />
+  },
+  {
+    path: '/contact',
+    element: <Contact />
+  }
   
 ]);
 

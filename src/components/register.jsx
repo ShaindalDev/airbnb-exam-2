@@ -1,8 +1,9 @@
 //react imports
 import { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
 
 //yup form validation import
 import * as yup from 'yup';
@@ -13,12 +14,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 //API imports
 import axios from "../api/axios";
+import Toggler from "./Toggler";
+import TogglerManager from "./Toggler";
+import Checkbox from "./checkbox";
 
 const REGISTER_URL = "/auth/register";
 
 const RegisterForm = () => {
     const [submit, setSubmit] = useState(false);
     const [loginError, setLoginError] = useState(null);
+    const [manager, setManager] = useState(false);
+    const [isEnabled, setIsEnabled] = useState(false);
 
     const validationSchema = yup.object().shape({
         username: yup.string().required('Username is required')
@@ -46,15 +52,23 @@ const RegisterForm = () => {
     setLoginError(null);
     console.log(data);
     
+
+    
     try {
         const response = await axios.post(REGISTER_URL, {
             name: data.username,
             email: data.email,
             password: data.password,
+            manager: data.manager,
+            avatar: data.avatar,
         },
              {
             headers: { 'Content-Type' : 'application/json'}
         });
+        if ("accessToken" in response) {
+          localStorage.setItem("ApiToken", response["accessToken"]);
+          localStorage.setItem("UserData", JSON.stringify(response));
+        }
         console.log("response", response.data);
         setAuth(response.data);
         navigate("/");
@@ -117,6 +131,30 @@ const RegisterForm = () => {
                   />
                   {errors && errors.email && <p className="text-xs italic text-red-500">{errors.email.message}</p>}
                 </div>
+                <div className="input-wrapper flex flex-col">
+                  <label
+                  className="block text-grey-700 text-sm font-bold my-2"
+                  htmlFor="avatar"
+                  >
+                    Avatar
+                  </label>
+                  <input
+                  className="w-full px-3 py-2 border border-gray-300 placeholder-slate-400 bg-slate-100 rounded-md focus:outline-none
+                  focus:border-ingdigo-500"
+                  type="url"
+                  {...register("avatar")}
+                  id="avatar"
+                  placeholder="url link to your avatar"
+                  />
+                </div>
+                {/* testing new switch for venue manager*/}
+                <div className="flex flex-col my-4 border-2 border-gray-300">
+                 <Checkbox 
+                 id="venueManager"
+                 label="Venue Manager?"
+                 checked={true} />
+                </div>
+                    
                     <div className="input-wrapper flex flex-col">
                       <label
                   className="block text-gray-700 text-sm font-bold my-2"
@@ -147,7 +185,7 @@ const RegisterForm = () => {
               <span className="line">
                 {/*put router link here*/}
                 <Link
-                  to={`/signIn`}
+                  to={`/login`}
                   className="font-semibold leading-6 text-blue-500 hover:text-blue-800"
                 >
                   Sign In here

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 //logo
 import LogoDark from "../assets/img/logo-dark.svg";
 import LogoWhite from "../assets/img/logo-white.svg";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [header, setHeader] = useState(false);
   useEffect(() => {
@@ -35,7 +36,8 @@ const Header = () => {
           <a href="/login" className="hover:text-accent transition">
             LOGIN
           </a>
-          <a href="" className="hover:text-accent transition">
+          {/* <Link to={'/contact'} className="hover:text-accent transition"></Link> */}
+          <a href="/contact" className="hover:text-accent transition">
             Contact
           </a>
         </nav>
