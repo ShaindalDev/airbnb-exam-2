@@ -12,4 +12,3 @@ export const bookings = '/bookings';
 
 //Dummy test api for dev purpose
 export const dummyAPI = 'https://dummyjson.com/products/1';
-

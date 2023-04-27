@@ -50,3 +50,6 @@ const UserProvider = ({ children }) => {
 };
 
 export default UserProvider;
+
+//Data that i want to get from the get request is 
+// name, avatar, accesstoken, venueManger

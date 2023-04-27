@@ -22,7 +22,7 @@ const SignInForm = () => {
 
     const validationSchema = yup.object().shape({
         email: yup.string().required('Email is required to sign in')
-        .email('Invaldig email address'),
+        .email('Invalid email address'),
         password: yup.string().required('Password is required to sign in').min(8, 'minimum 8 characters'),
     })
 
@@ -34,7 +34,7 @@ const SignInForm = () => {
         resolver: yupResolver(validationSchema),
     });
     const navigate = useNavigate();
-    const [auth, setAuth] = useContext(AuthContext);
+    const [auth, setAuth] = useContext(AuthContext)
 
     // Form submit handler
     async function onSubmit(data) {
@@ -49,12 +49,12 @@ const SignInForm = () => {
             },
             {
                 headers: {
-                    Autorization: 'Bearer',
+                    Authorization: 'Bearer',
                 }
             });
             console.log("response", response.data);
             setAuth(response.data);
-            navigate("/");
+            navigate("/profile");
         } catch (error) {
             console.log("error", error);
             setLoginError(error.toString());
@@ -63,7 +63,6 @@ const SignInForm = () => {
         }
 
     }
-
 
   return (
     <>

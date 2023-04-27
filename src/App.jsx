@@ -1,4 +1,5 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 //components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -45,11 +46,13 @@ const router = createBrowserRouter([
 
 
 const App = () => {
+  
   return <div>
+    
     <Header />
     <RouterProvider router={router}  />
     <Footer />
-
+    
   </div>;
 };
 

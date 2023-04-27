@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+
+import React, { Fragment, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
 // Icons
@@ -7,12 +8,20 @@ import {
   PencilSquareIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/20/solid";
+// Axios
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+//Hente all profil data i axios request i denne filen her. 
+const ProfileCard = ({ name, avatar, venueManager}) => {
 
-const ProfileCard = () => {
+   if (!name) {
+    console.error(name);
+    return <h1>There is no data available</h1>;
+   }
+
   return (
     <>
       <section className="flex flex-col justify-center antialiased text-gray-600 p-4">
@@ -45,12 +54,12 @@ const ProfileCard = () => {
                           href="#0"
                         >
                           <h2 className="text-xl leading-snug justify-center font-semibold">
-                            Shaindal Dev
+                            {name}
                           </h2>
                         </a>
-                        <div className="flex items-center">
+                         <div className="flex items-center">
                           <span className="text-sm font-medium text-gray-400 -mt-0.5 mr-1"></span>{" "}
-                          <span>Venue Manager</span>
+                          <span>{venueManager ? "Manager" : "Customer"}</span>
                         </div>
                       </div>
                     </div>
@@ -141,3 +150,7 @@ const ProfileCard = () => {
 };
 
 export default ProfileCard;
+
+
+//Data that i want to get from the get request is 
+// name, avatar, accesstoken, venueManger

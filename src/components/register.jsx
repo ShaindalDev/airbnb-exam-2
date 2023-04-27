@@ -4,36 +4,38 @@ import { useForm, controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-
 //yup form validation import
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 //components import
- import AuthContext from "../context/authContext";
+import AuthContext from "../context/authContext";
 
 //API imports
 import axios from "../api/axios";
-import Toggler from "./Toggler";
-import TogglerManager from "./Toggler";
 import Checkbox from "./checkbox";
 
 const REGISTER_URL = "/auth/register";
 
 const RegisterForm = () => {
-    const [submit, setSubmit] = useState(false);
-    const [loginError, setLoginError] = useState(null);
-    const [manager, setManager] = useState(false);
-    const [isEnabled, setIsEnabled] = useState(false);
+  const [submit, setSubmit] = useState(false);
+  const [loginError, setLoginError] = useState(null);
+  const [isEnabled, setIsEnabled] = useState(false);
 
-    const validationSchema = yup.object().shape({
-        username: yup.string().required('Username is required')
-        .min(4, 'Username must be at least 4 characters'),
-        email: yup.string().required('Email is required').email('Invalid email address'),
-        password: yup.string()
-        .required('Password is required')
-        .min(8, 'Password must be at least 8 characters'),
-    })
+  const validationSchema = yup.object().shape({
+    username: yup
+      .string()
+      .required("Username is required")
+      .min(4, "Username must be at least 4 characters"),
+    email: yup
+      .string()
+      .required("Email is required")
+      .email("Invalid email address"),
+    password: yup
+      .string()
+      .required("Password is required")
+      .min(8, "Password must be at least 8 characters"),
+  });
 
   const {
     register,
@@ -51,32 +53,33 @@ const RegisterForm = () => {
     setSubmit(true);
     setLoginError(null);
     console.log(data);
-    
 
-    
     try {
-        const response = await axios.post(REGISTER_URL, {
-            name: data.username,
-            email: data.email,
-            password: data.password,
-            manager: data.manager,
-            avatar: data.avatar,
+      const response = await axios.post(
+        REGISTER_URL,
+        {
+          name: data.username,
+          email: data.email,
+          password: data.password,
+          avatar: data.avatar,
+          venueManger: data.venueManger,
         },
-             {
-            headers: { 'Content-Type' : 'application/json'}
-        });
-        if ("accessToken" in response) {
-          localStorage.setItem("ApiToken", response["accessToken"]);
-          localStorage.setItem("UserData", JSON.stringify(response));
+        {
+          headers: { "Content-Type": "application/json" },
         }
-        console.log("response", response.data);
-        setAuth(response.data);
-        navigate("/");
+      );
+      if ("accessToken" in response) {
+        localStorage.setItem("ApiToken", response["accessToken"]);
+        localStorage.setItem("UserData", JSON.stringify(response));
+      }
+      console.log("response", response.data);
+      setAuth(response.data);
+      navigate("/");
     } catch (error) {
-        console.log("error", error);
-        setLoginError(error.toString());
+      console.log("error", error);
+      setLoginError(error.toString());
     } finally {
-        setSubmit(false);
+      setSubmit(false);
     }
   }
   return (
@@ -84,15 +87,19 @@ const RegisterForm = () => {
       <section className="py-24">
         <div className=" container mx-auto lg:px-0 bg-white shadow-2xl">
           <div className="mx-auto py-8">
-            <h1 className="mt-10 text-center text-2xl font-primary-bold leading-9 tracking-[1.5px] text-black">Register</h1>
+            <h1 className="mt-10 text-center text-2xl font-primary-bold leading-9 tracking-[1.5px] text-black">
+              Register
+            </h1>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="w-full max-w-sm mx-auto bg-white p-8"
             >
-                {loginError && (
-                    <div className="bg-white py-4 px-8 text-red-500 mb-2 border-2 border-solid">Error: Values not valid</div>
-                )}
-                
+              {loginError && (
+                <div className="bg-white py-4 px-8 text-red-500 mb-2 border-2 border-solid">
+                  Error: Values not valid
+                </div>
+              )}
+
               <div className="mb-4">
                 <div className="input-wrapper flex flex-col">
                   <label
@@ -124,59 +131,71 @@ const RegisterForm = () => {
                   <input
                     className="w-full px-3 py-2 border border-gray-300 placeholder-slate-400 bg-slate-100 rounded-md focus:outline-none focus:border-indigo-500"
                     type="email"
-                    {...register('email')}
+                    {...register("email")}
                     autoComplete="off"
                     id="email"
                     placeholder="Your Email"
                   />
-                  {errors && errors.email && <p className="text-xs italic text-red-500">{errors.email.message}</p>}
+                  {errors && errors.email && (
+                    <p className="text-xs italic text-red-500">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
                 <div className="input-wrapper flex flex-col">
                   <label
-                  className="block text-grey-700 text-sm font-bold my-2"
-                  htmlFor="avatar"
+                    className="block text-grey-700 text-sm font-bold my-2"
+                    htmlFor="avatar"
                   >
                     Avatar
                   </label>
                   <input
-                  className="w-full px-3 py-2 border border-gray-300 placeholder-slate-400 bg-slate-100 rounded-md focus:outline-none
+                    className="w-full px-3 py-2 border border-gray-300 placeholder-slate-400 bg-slate-100 rounded-md focus:outline-none
                   focus:border-ingdigo-500"
-                  type="url"
-                  {...register("avatar")}
-                  id="avatar"
-                  placeholder="url link to your avatar"
+                    type="url"
+                    {...register("avatar")}
+                    id="avatar"
+                    placeholder="url link to your avatar"
                   />
                 </div>
                 {/* testing new switch for venue manager*/}
                 <div className="flex flex-col my-4 border-2 border-gray-300">
-                 <Checkbox 
-                 id="venueManager"
-                 label="Venue Manager?"
-                 checked={true} />
+                  <Checkbox
+                    id="venueManager"
+                    label="Venue Manager?"
+                    onChange={(e) => {
+                      setIsEnabled(e.target.value);
+                    }}
+                    {...register("venueManger")}
+                    checked={true}
+                  />
                 </div>
-                    
-                    <div className="input-wrapper flex flex-col">
-                      <label
-                  className="block text-gray-700 text-sm font-bold my-2"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <input
-                  className="w-full px-3 py-2 border border-gray-300 placeholder-slate-400 bg-slate-100 rounded-md focus:outline-none focus:border-indigo-500"
-                  type="password"
-                  {...register('password')}
-                  id="password"
-                  placeholder="Password"
-                />
-                {errors && errors.email && (
-                <p className="text-xs italic text-red-500">{errors.password.message}</p>)}  
-                    </div>
-                
 
+                <div className="input-wrapper flex flex-col">
+                  <label
+                    className="block text-gray-700 text-sm font-bold my-2"
+                    htmlFor="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="w-full px-3 py-2 border border-gray-300 placeholder-slate-400 bg-slate-100 rounded-md focus:outline-none focus:border-indigo-500"
+                    type="password"
+                    {...register("password")}
+                    id="password"
+                    placeholder="Password"
+                  />
+                  {errors && errors.email && (
+                    <p className="text-xs italic text-red-500">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
               </div>
               <div className="input-wrapper">
-                <button className="focus-shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none">{submit ? "Registrating..." : "Register"}</button>
+                <button className="focus-shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none">
+                  {submit ? "Registrating..." : "Register"}
+                </button>
               </div>
             </form>
             <p className="mt-10 text-center text-sm text-gray-300">
@@ -197,9 +216,7 @@ const RegisterForm = () => {
       </section>
     </>
   );
-
 };
-
 
 export default RegisterForm;
 

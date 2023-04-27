@@ -1,6 +1,9 @@
+/* eslint-disable no-restricted-globals */
 //react imports
 import React, { useEffect } from "react";
-//icons 
+// API functions
+import useApi from "../hooks/useApi";
+import { profiles } from "../api/constants";
 //Componentes
 import HeroSlider from "../components/HeroSlider";
 import ProfileNavigation from "../components/ProfileNavigation";
@@ -13,6 +16,30 @@ const Profile = () => {
   useEffect(() => {
     document.title = "Holidayze | Profile";
   }, []);
+  const getLocalData = localStorage.getItem("userProfile");
+  const parsedLocalData = JSON.parse(getLocalData);
+  // const userName = parsedLocalData.name;
+
+  const url = profiles + `/${name}?_bookings=true&_venues=true`;
+  const method = "get";
+
+  const { data, isLoading, IsError } = useApi(url, method);
+
+  console.log("profile", data)
+
+  const profileData = {
+    name: data.name,
+    avatar: data.avatar,
+    venueManager: data.venueManager,
+  };
+
+  if (!profileData) {
+    return;
+  }
+  if (isLoading) return <h1>Loading...</h1>;
+
+  if (IsError) console.log(IsError);
+
   return (
     <>
       <HeroSlider />
@@ -25,9 +52,9 @@ const Profile = () => {
       {/* Profile Content */}
       <section className="mt-14">
         {/* User info */}
-          <ProfileCard />
+          <ProfileCard  />
       </section>
-      {/* <MyVenues /> */}
+      {/* <MyVenues data={data.venues} /> */}
       <Rooms />
       
         <CreateNewVenue />
