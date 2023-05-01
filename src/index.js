@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
-import VenueProvider from './context/VenueContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { BrowserRouter } from 'react-router-dom';
+import './index.css';
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 3000 } },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <VenueProvider>
+  <QueryClientProvider client={queryClient}>
     <React.StrictMode>
-      
+      <BrowserRouter>
       <App />
-      
+      </BrowserRouter>
     </React.StrictMode>
-    </VenueProvider>
+  </QueryClientProvider>
+  
 );

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 //icons
 import { BsArrowsFullscreen, BsPeople } from "react-icons/bs";
 
-const Venue = ({ venue }) => {
+const Venue = ( { venue } ) => {
   //destructure venue
   const { id, name, media, size, maxGuests, description, price } = venue;
   return (

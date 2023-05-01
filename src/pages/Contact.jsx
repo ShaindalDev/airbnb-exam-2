@@ -8,8 +8,8 @@ const Contact = () => {
   return (
     <>
       <HeroSlider />
-      <section className="section py-14" id="home">
-        <div className="container">
+        <section className="section  py-14" id="home">
+        <div className="container mx-auto">
           <div className="lg:flex justify-center">
             <div className="lg:w-2/3 mx-2">
               <div className="text-center">
@@ -28,7 +28,7 @@ const Contact = () => {
       </section>
 
       <section className="section py-10">
-        <div className="container">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div>
               <div className="md:flex md:flex-row lg:justify-start lg:flex-col lg:text-left md:justify-between">

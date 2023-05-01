@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 //react imports
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 // API functions
 import useApi from "../hooks/useApi";
 import { profiles } from "../api/constants";
@@ -11,11 +11,15 @@ import Rooms from "../components/Rooms";
 import CreateNewVenue from "../components/Profile/CreateVenue";
 import MyVenues from "../components/Profile/MyVenues";
 import ProfileCard from "../components/Profile/ProfileCard";
+import VenueProvider from "../context/VenueContext";
+import { useAuth } from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   useEffect(() => {
     document.title = "Holidayze | Profile";
   }, []);
+  const auth = useAuth();
   const getLocalData = localStorage.getItem("userProfile");
   const parsedLocalData = JSON.parse(getLocalData);
   // const userName = parsedLocalData.name;
@@ -42,22 +46,30 @@ const Profile = () => {
 
   return (
     <>
-      <HeroSlider />
-      {/* mini nav */}
+    {auth.user ? (
+      <Fragment>
+        <HeroSlider />
+      
       <div className="container mx-auto relative">
         <div className="bg-white mt-4 p-4 lg:shadow-xl lg:absolute  lg:left-0 lg:right-0 lg:p-0 lg:z-30 lg:-top-12">
           <ProfileNavigation />
         </div>
       </div>
-      {/* Profile Content */}
+      
       <section className="mt-14">
         {/* User info */}
           <ProfileCard  />
       </section>
-      {/* <MyVenues data={data.venues} /> */}
-      <Rooms />
+     
+      <VenueProvider />
       
         <CreateNewVenue />
+      </Fragment>
+      
+    ) : (
+      <Link to="/home">HOme</Link>
+    )}
+      
       
       
     </>
@@ -65,3 +77,6 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+ {/* <MyVenues data={data.venues} /> */}

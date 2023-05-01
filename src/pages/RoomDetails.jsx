@@ -17,10 +17,6 @@ import VenueDescription from "../components/Venue/VenueDescription";
 import { VenueContext } from "../context/VenueContext";
 //icons
 
-
-
-
-
 const RoomDetails = () => {
   useEffect(() => {
     document.title = "Holidaze | Details";

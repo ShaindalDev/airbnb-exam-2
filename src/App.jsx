@@ -1,9 +1,6 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 //components
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-
 
 //pages
 import Home from "./pages/Home";
@@ -12,47 +9,39 @@ import SignIn from './pages/SignIn';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Contact from './pages/Contact';
+
+
 // react router
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
+import { AuthProvider } from './context/AuthContext1';
+import VenueProvider from './context/VenueContext';
+import Layout from './components/layout/Layout';
+import RequireAuth from './hooks/RequireAuth';
 
 
-const router = createBrowserRouter([
-  {
-  path: '/',
-  element: <Home /> 
-  },
-  {
-    path: '/room/:id',
-    element: <RoomDetails />
-  },
-  {
-    path: '/login',
-    element: <SignIn />
-  },
-  {
-    path: '/register',
-    element: <Register />
-  },
-  {
-    path: '/profile',
-    element: <Profile />
-  },
-  {
-    path: '/contact',
-    element: <Contact />
-  }
-  
-]);
-
-
-const App = () => {
+const App = (props) => {
   
   return <div>
-    
-    <Header />
-    <RouterProvider router={router}  />
-    <Footer />
-    
+    <AuthProvider>
+      <VenueProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {/* Public */}
+            <Route index element={<Home />} />
+            <Route path='/login' element={<SignIn />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/room/:id' element={<RoomDetails />} />
+            
+            {/* auth protected routes, requires registered profile*/}
+            <Route element={<RequireAuth />}>
+              <Route path='/profile' element={<Profile />} />
+              <Route path='/contact' element={<Contact />} />
+            </Route>
+          </Route>
+        </Routes>
+      </VenueProvider>
+    </AuthProvider>
   </div>;
 };
 

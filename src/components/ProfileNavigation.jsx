@@ -1,4 +1,6 @@
 import React from "react";
+import { useAuth } from "../hooks/useAuth";
+
 
 const tabs = [
   { name: "My Profile", href: "/profile", current: true },
@@ -8,10 +10,12 @@ const tabs = [
 ];
 
 function classNames(...classes) {
+  
   return classes.filter(Boolean).join(" ");
 }
 
 const ProfileNavigation = () => {
+  const auth = useAuth();
   const isLoggedIn = "isLoggedIn";
   const storedData = "UserData";
 

@@ -1,5 +1,5 @@
 
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
 // Icons
@@ -16,7 +16,10 @@ function classNames(...classes) {
 }
 //Hente all profil data i axios request i denne filen her. 
 const ProfileCard = ({ name, avatar, venueManager}) => {
-
+  const localUserData = localStorage.getItem("UserProfile");
+ const userData = JSON.parse(localUserData);
+ const loggedInAs = userData.venueManager;
+ useEffect(() => {});
    if (!name) {
     console.error(name);
     return <h1>There is no data available</h1>;

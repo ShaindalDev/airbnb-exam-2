@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Rooms from "../components/Rooms";
 import BookForm from "../components/BookForm";
 import HeroSlider from "../components/HeroSlider";
+import VenueProvider from "../context/VenueContext";
 
 
 const Home = () => {
