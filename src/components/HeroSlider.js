@@ -9,6 +9,7 @@ import { EffectFade, Autoplay } from "swiper";
 import Img1 from "../assets/img/heroSlider/houseWinter.jpg";
 import Img2 from "../assets/img/heroSlider/modern.jpg";
 import Img3 from "../assets/img/heroSlider/luxuryHouse.jpg";
+import { Link } from "react-router-dom";
 
 const slides = [
   {
@@ -52,7 +53,10 @@ const HeroSlider = () => {
                 {title}
               </h1>
               <button className="btn btn-lg btn-primary mx-auto">
-                {btnText}
+                <Link to="/">
+                  {btnText}
+                </Link>
+                
               </button>
             </div>
             <div className="absolute top-0 w-full h-full">
