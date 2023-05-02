@@ -32,10 +32,10 @@ const App = (props) => {
             <Route path='/register' element={<Register />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/room/:id' element={<RoomDetails />} />
-            
+            <Route path='/profile' element={<Profile />} />
             {/* auth protected routes, requires registered profile*/}
             <Route element={<RequireAuth />}>
-              <Route path='/profile' element={<Profile />} />
+              
               <Route path='/contact' element={<Contact />} />
             </Route>
           </Route>

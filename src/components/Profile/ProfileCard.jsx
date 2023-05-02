@@ -18,7 +18,7 @@ function classNames(...classes) {
 const ProfileCard = ({ name, avatar, venueManager}) => {
   const localUserData = localStorage.getItem("UserProfile");
  const userData = JSON.parse(localUserData);
- const loggedInAs = userData.venueManager;
+  
  useEffect(() => {});
    if (!name) {
     console.error(name);
@@ -29,7 +29,7 @@ const ProfileCard = ({ name, avatar, venueManager}) => {
     <>
       <section className="flex flex-col justify-center antialiased text-gray-600 p-4">
         <div className="h-full">
-          <div className="max-w-sm mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+          <div className="max-w-lg mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
             <div className="flex flex-col h-full">
               <div className="flex-grow p-5">
                 <div className="flex justify-between items-start">

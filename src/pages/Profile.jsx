@@ -13,23 +13,22 @@ import MyVenues from "../components/Profile/MyVenues";
 import ProfileCard from "../components/Profile/ProfileCard";
 import VenueProvider from "../context/VenueContext";
 import { useAuth } from "../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import MyBookings from "../components/Profile/MyBookings";
 
 const Profile = () => {
   useEffect(() => {
     document.title = "Holidayze | Profile";
   }, []);
-  const auth = useAuth();
-  const getLocalData = localStorage.getItem("userProfile");
-  const parsedLocalData = JSON.parse(getLocalData);
-  // const userName = parsedLocalData.name;
-
+  
+  const getLocalData = localStorage.getItem("UserProfile");
+  const userProfile = JSON.parse(getLocalData);
+  const name = userProfile.name;
+  
   const url = profiles + `/${name}?_bookings=true&_venues=true`;
   const method = "get";
 
   const { data, isLoading, IsError } = useApi(url, method);
-
-  console.log("profile", data)
 
   const profileData = {
     name: data.name,
@@ -46,7 +45,6 @@ const Profile = () => {
 
   return (
     <>
-    {auth.user ? (
       <Fragment>
         <HeroSlider />
       
@@ -58,20 +56,15 @@ const Profile = () => {
       
       <section className="mt-14">
         {/* User info */}
-          <ProfileCard  />
+          <ProfileCard name={name}
+          venueManager={data.venueManager}  />
       </section>
-     
+      {/* Users bookings*/}
+      <MyBookings data={data.bookings} />
       <VenueProvider />
       
         <CreateNewVenue />
       </Fragment>
-      
-    ) : (
-      <Link to="/home">HOme</Link>
-    )}
-      
-      
-      
     </>
   );
 };

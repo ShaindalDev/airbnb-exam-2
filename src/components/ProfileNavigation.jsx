@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 
 const tabs = [
   { name: "My Profile", href: "/profile", current: true },
-  { name: "My Bookings", href: "#", current: false },
+  { name: "My Bookings", href: "#myBookings", current: false },
   { name: "My Venues", href: "#myVenues", current: false },
   { name: "Create New Venue", href: "#createNewVenue", current: false },
 ];
@@ -33,7 +33,7 @@ const ProfileNavigation = () => {
             <select
               id="tabs"
               name="tabs"
-              className="block w-full  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+              className="block w-2/3  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
               defaultValue={tabs.find((tab) => tab.current).name}
             >
               {tabs.map((tab) => (
@@ -83,7 +83,7 @@ const ProfileNavigation = () => {
             <select
               id="tabs"
               name="tabs"
-              className="block w-full  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+              className="block w-2/3  border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
               defaultValue={tabs.find((tab) => tab.current).name}
             >
               {tabs.map((tab) => (

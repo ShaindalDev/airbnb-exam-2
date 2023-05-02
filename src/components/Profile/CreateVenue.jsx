@@ -4,9 +4,9 @@ export default function CreateNewVenue() {
   return (
     <>
     <section id="createNewVenue" className="py-12">
-      <h1 className="font-bold text-lg">Create a new venue</h1>
-      <div className="mx-auto py-12 px-5 border border-gray-300 mb-12 pb-4 shadow-lg shadow-gray-400 max-w-7xl justify-center items-center">
-        
+      
+      <div className="mx-auto py-8 px-5 border border-gray-300 mb-12 pb-4 shadow-lg shadow-gray-400 max-w-7xl justify-center items-center">
+        <h1 className="font-extrabold text-lg py-2">Create a new venue</h1>
         <form>
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
