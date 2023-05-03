@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
-const Checkbox = ({ id, label, checked, ...props }) => {
-    const defaultChecked = checked ? checked : false;
-    const [isChecked, setIsChecked] = useState(defaultChecked);
+
+const Checkbox = ({ id, label, }) => {
+    
+    const [isChecked, setIsChecked] = useReducer(checked => !checked, false);
     console.log(isChecked)
     return (
       <div className="checkbox-wrapper">
         <input
           id={id}
           type="checkbox"
-          checked={isChecked}
-          onChange={() => setIsChecked((prev) => !prev)}
-          {...props}
+          value={isChecked}
+          onChange={setIsChecked}
+          
         />
         <label className="p-2" htmlFor={id}>{label}</label>
-        <p className="px-6">{isChecked ? "(Selected)" : "(Unchecked)"}</p>
       </div>
     );
   }

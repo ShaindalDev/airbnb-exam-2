@@ -1,6 +1,6 @@
 //react imports
 import { useContext, useState } from "react";
-import { useForm, controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -13,14 +13,13 @@ import AuthContext from "../context/authContext";
 
 //API imports
 import axios from "../api/axios";
-import Checkbox from "./checkbox";
 
 const REGISTER_URL = "/auth/register";
 
 const RegisterForm = () => {
   const [submit, setSubmit] = useState(false);
   const [loginError, setLoginError] = useState(null);
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const validationSchema = yup.object().shape({
     username: yup
@@ -35,6 +34,7 @@ const RegisterForm = () => {
       .string()
       .required("Password is required")
       .min(8, "Password must be at least 8 characters"),
+      
   });
 
   const {
@@ -49,7 +49,7 @@ const RegisterForm = () => {
   const [auth, setAuth] = useContext(AuthContext);
 
   // Form submit handler
-  async function onSubmit(data) {
+  async function onSubmit(data, checked) {
     setSubmit(true);
     setLoginError(null);
     console.log(data);
@@ -62,11 +62,13 @@ const RegisterForm = () => {
           email: data.email,
           password: data.password,
           avatar: data.avatar,
-          venueManger: data.venueManger,
+          venueManager: data.venueManager,
         },
         {
           headers: { "Content-Type": "application/json" },
-        }
+        
+        },
+       
       );
       if ("accessToken" in response) {
         localStorage.setItem("ApiToken", response["accessToken"]);
@@ -82,6 +84,7 @@ const RegisterForm = () => {
       setSubmit(false);
     }
   }
+ 
   return (
     <>
       <section className="py-24">
@@ -158,16 +161,18 @@ const RegisterForm = () => {
                     placeholder="url link to your avatar"
                   />
                 </div>
-                {/* testing new switch for venue manager*/}
-                <div className="flex flex-col my-4 border-2 border-gray-300">
-                  <Checkbox
+                {/* testing new checkbox for venue manager*/}
+                <div className="flex flex-col my-4 p-4">
+                  <label className="p-2" htmlFor="venueManager">
+                    Venue Manager?
+                  </label>
+                  <input
                     id="venueManager"
-                    label="Venue Manager?"
-                    onChange={(e) => {
-                      setIsEnabled(e.target.value);
-                    }}
-                    {...register("venueManger")}
-                    checked={true}
+                    name="venueManager"
+                    type="checkbox"
+                    onChange={e => setChecked(e.target.checked)}
+                    {...register("venueManager")}
+                    
                   />
                 </div>
 
