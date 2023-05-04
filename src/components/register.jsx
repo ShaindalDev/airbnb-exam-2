@@ -233,25 +233,3 @@ export default RegisterForm;
 //     "venueManager": false,
 //     "password": "stringst"
 //   }
-
-{
-  /* <section class="py-24">
-      <div className="container mx-auto lg:px-0 bg-accent shadow-xl rounded">
-        <div className="container mx-auto py-8">
-          <h1 className="text-2xl font-bold mb-6 text-center">Registration Form</h1>
-          <form className="w-full max-w-sm mx-auto bg-white p-8 rounded-md shadow-md">
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                for="name"
-              >
-                Name
-              </label>
-              <input
-                className="w-full px-3 py-2 border border-gray-300 placeholder-slate-400 bg-slate-100 rounded-md focus:outline-none focus:border-indigo-500"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Your Name"
-              /> */
-}

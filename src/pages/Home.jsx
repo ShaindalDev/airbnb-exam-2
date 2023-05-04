@@ -7,6 +7,7 @@ import HeroSlider from "../components/HeroSlider";
 import VenueProvider from "../context/VenueContext";
 
 
+
 const Home = () => {
  useEffect(() => {
   document.title = "Holidaze | Home";

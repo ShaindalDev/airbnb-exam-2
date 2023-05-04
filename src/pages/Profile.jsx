@@ -62,6 +62,7 @@ const Profile = () => {
       {/* Users bookings*/}
       <MyBookings data={data.bookings} />
       <VenueProvider />
+      <MyVenues data={data.venues} />
       
         <CreateNewVenue />
       </Fragment>

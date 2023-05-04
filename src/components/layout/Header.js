@@ -6,6 +6,7 @@ import LogoDark from "../../assets/img/logo-dark.svg";
 import LogoWhite from "../../assets/img/logo-white.svg";
 import { getLocalStorageItem } from "../../js/getStorageItems";
 import LogOut from "../../js/logOut";
+import SearchFilter from "../SearchBar";
 
 const Header = () => {
   const auth = useAuth();
@@ -20,40 +21,58 @@ const Header = () => {
 
   const handleLogout = () => {
     LogOut();
-  }
+  };
   return (
     <header
       className={`${
         header ? "bg-white py-6 shadow-lg" : "bg-transparent py-8"
       } fixed z-50 w-full transition-all duration-500`}
     >
-      <div className="container mx-auto flex flex-col items-center gap-y-6 lg:flex-row lg:justify-between lg:gap-y-0">
+      <div className='container mx-auto flex flex-col items-center gap-y-6 lg:flex-row lg:justify-between lg:gap-y-0'>
         {/* Logo */}
-        <a href="/">
+        <a href='/'>
           {header ? (
-            <img className="w-[160px]" src={LogoDark} alt="Holidaze logo in Dark"/>
+            <img
+              className='w-[160px]'
+              src={LogoDark}
+              alt='Holidaze logo in Dark'
+            />
           ) : (
-            <img className="w-[160px]" src={LogoWhite} alt="Holidaze logo in white"/>
+            <img
+              className='w-[160px]'
+              src={LogoWhite}
+              alt='Holidaze logo in white'
+            />
           )}
         </a>
-
-        <nav className={`${header ? "text-primary" : "text-white"} flex gap-x-4 font-tertiary tracking-[3px] text-[15px] items-center uppercase lg:gap-x-8`}>
-          <Link to ="/" className="hover:text-accent transition">Home</Link>
+        <SearchFilter />
+        <nav
+          className={`${
+            header ? "text-primary" : "text-white"
+          } flex gap-x-4 font-tertiary tracking-[3px] text-[15px] items-center uppercase lg:gap-x-8`}
+        >
+          <Link to='/' className='hover:text-accent transition'>
+            Home
+          </Link>
           {isLoggedIn ? (
             <Fragment>
-              <Link to ="/profile" className="hover:text-accent transition">Profile</Link>
-              <Link to={'/contact'} className="hover:text-accent transition">Contact</Link>
-          <button onClick={handleLogout}>LOGOUT</button>
+              <Link to='/profile' className='hover:text-accent transition'>
+                Profile
+              </Link>
+              <Link to={"/contact"} className='hover:text-accent transition'>
+                Contact
+              </Link>
+              <button onClick={handleLogout}>LOGOUT</button>
             </Fragment>
           ) : (
             <Fragment>
-              <Link to="/login">LOGIN</Link>
-            <Link to={'/contact'} className="hover:text-accent transition">Contact</Link>
+              <Link to='/login'>LOGIN</Link>
+              <Link to={"/contact"} className='hover:text-accent transition'>
+                Contact
+              </Link>
             </Fragment>
-            
           )}
-          
-          
+
           {/* <a href="/contact" className="hover:text-accent transition">
             Contact
           </a> */}

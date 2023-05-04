@@ -20,7 +20,7 @@ const VenueProvider = ({ children }) => {
     const getVenues = async () => {
       try {
         // eslint-disable-next-line no-restricted-globals
-        const response = await axios.get(`/profiles/${name}?_venues=true`);
+        const response = await axios.get(`/profiles/{name}?_venues=true`);
         setVenues(response.data);
         console.log(response.data)
       } catch (err) {

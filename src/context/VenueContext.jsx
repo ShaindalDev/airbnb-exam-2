@@ -19,7 +19,7 @@ const VenueProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // setLoading(true);
+    
     const getVenues = async () => {
       try {
         const response = await axios.get('/venues');
