@@ -1,7 +1,7 @@
 // React import
 import React, { Component} from "react";
 // Axios Import
-import axios from "../api/axios";
+import axios from "axios";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 class SearchFilter extends Component {
@@ -36,7 +36,7 @@ class SearchFilter extends Component {
         await axios
         .get('https://api.noroff.dev/api/v1/holidaze/venues', { cancelToken: this.cancelToken.token,
         })
-        .this((res) => {
+        .then((res) => {
             this.setState({
                 Venue: res.data,
             })
@@ -47,8 +47,8 @@ class SearchFilter extends Component {
             }
         })
         let stringKwd = e.target.value.toLowerCase()
-        let filterData = this.state.Venue.filter((item) => {
-            return item.name.toLowerCase().indexOf(stringKwd) !== -1
+        let filterData = this.state.Venue.filter((venue) => {
+            return venue.name.toLowerCase().indexOf(stringKwd) !== -1
         })
         this.setState({
             Venue: filterData,
@@ -58,7 +58,7 @@ class SearchFilter extends Component {
 
         return (
             <div>
-              <form className='max-w-sm px-4'>
+              <div className='max-w-sm px-4'>
                 <div className='relative input-group'>
                   <MagnifyingGlassIcon className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-500 left-3"/>
                   <input
@@ -70,12 +70,12 @@ class SearchFilter extends Component {
                     className='w-full py-3 pl-12 pr-4 text-gray-400 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-accent'
                   />
                 </div>
-              </form>
+              </div>
               <div className="list-group">
-                {this.state.Venue.map((item) => {
+                {this.state.Venue.map((venue) => {
                     return [
-                        <a className="list-group-item list-group-item-action" key={item.id}>
-                            {item.name}
+                        <a className="list-group-item list-group-item-action" key={venue.id}>
+                            {venue.name}
                         </a>
                     ]
                 })}
