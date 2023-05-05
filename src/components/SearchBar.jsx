@@ -1,5 +1,5 @@
 // React import
-import React, { Component} from "react";
+import React, { Component } from "react";
 // Axios Import
 import axios from "axios";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
@@ -25,7 +25,7 @@ class SearchFilter extends Component {
             return
         }
         this.setState({
-            venueList: [],
+            VenueList: [],
         })
     }
     onChange = async (e) => {
