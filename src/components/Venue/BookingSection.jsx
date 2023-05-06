@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CheckIn from "../CheckIn";
 import CheckOut from "../CheckOut";
 import AdultsDropdown from "../AdultsDropdown";
@@ -6,6 +6,13 @@ import KidsDropdown from "../KidsDropdown";
 import { FaCheck, FaPray } from "react-icons/fa";
 
 const BookingSection = ({ price }) => {
+  const token = localStorage.getItem("ApiToken");
+
+  var authHeaders = new Headers();
+  authHeaders.append("Content-type", "application/json");
+
+  authHeaders.append("Authorization", "Bearer " + token);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 

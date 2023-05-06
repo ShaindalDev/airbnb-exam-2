@@ -23,6 +23,7 @@ const RoomDetails = () => {
    }, []);
 
   const { venues } = useContext(VenueContext);
+  
   let { id } = useParams();
   //get room
   const venue = venues.find((venue) => {
@@ -44,6 +45,7 @@ const { wifi, parking, breakfast, pets } = meta;
         <h1 className="text-6xl text-white z-20 font-primary text-center">
           {name} Details
         </h1>
+
       </div>
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row h-full py-24">

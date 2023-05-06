@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 //context
 import { UserVenueContext } from '../../context/UserVenueContext';
 //components
-import Venue from '../Room';
+import MyVenue from './MyVenue';
 //Loader
 import {SpinnerDotted} from 'spinners-react';
 
@@ -29,7 +29,7 @@ const Venues = ({ data }) => {
     {/* grid */}
     <div className='grid grid-cols-1 max-w-sm mx-auto gap-[30px] lg:grid-cols-3 lg:max-w-none lg:mx-0'>
       {data.map(venue => {
-        return <Venue venue={venue} key={venue.id} />;
+        return <MyVenue venue={venue} key={venue.id} />;
         })}
     </div>
     </div>

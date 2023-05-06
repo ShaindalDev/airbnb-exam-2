@@ -5,7 +5,6 @@ import Rooms from "../components/Rooms";
 import BookForm from "../components/BookForm";
 import HeroSlider from "../components/HeroSlider";
 import VenueProvider from "../context/VenueContext";
-import SearchFilter from "../components/SearchBar";
 
 
 
