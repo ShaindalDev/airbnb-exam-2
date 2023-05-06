@@ -1,14 +1,16 @@
 import React, { createContext, useEffect, useState } from "react";
 
 //Api imports
-import api from "../api/venues";
+import axios from "../api/axios";
+
+//Test API with json-server import 
+//uncomment the line below and comment out the import above to use testAPI
+// import axios from "../api/axiosTest";
 
 //create context
 export const VenueContext = createContext();
 
-
-
-const RoomProvider = ({ children }) => {
+const VenueProvider = ({ children }) => {
   const [venues, setVenues] = useState([]);
   const [adults, setAdults] = useState("1 Adult");
   const [kids, setKids] = useState("0 Kids");
@@ -17,10 +19,10 @@ const RoomProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // setLoading(true);
+    
     const getVenues = async () => {
       try {
-        const response = await api.get('/venues');
+        const response = await axios.get('/venues');
         setVenues(response.data);
         // console.log(response.data)
       } catch (err) {
@@ -35,11 +37,11 @@ const RoomProvider = ({ children }) => {
           console.log(`Error: ${err.message}`)
         }
       }
-
+      setTotal(Number(adults[0]) + Number(kids[0]));
     }
-    setTotal(Number(adults[0]) + Number(kids[0]));
+    
     getVenues();
-  });
+  }, [adults, setAdults, kids, setKids, total, setTotal]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -64,4 +66,4 @@ const RoomProvider = ({ children }) => {
   );
 };
 
-export default RoomProvider;
+export default VenueProvider;

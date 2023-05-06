@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 //Components
 import Rooms from "../components/Rooms";
 import BookForm from "../components/BookForm";
 import HeroSlider from "../components/HeroSlider";
+import VenueProvider from "../context/VenueContext";
+import SearchFilter from "../components/SearchBar";
+
 
 
 const Home = () => {
@@ -20,7 +24,6 @@ const Home = () => {
           testing
         </div>
       </div>
-
       <Rooms />
     </>
   );

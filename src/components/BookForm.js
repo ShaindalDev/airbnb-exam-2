@@ -4,7 +4,7 @@ import AdultsDropdown from "../components/AdultsDropdown";
 import KidsDropdown from "../components/KidsDropdown";
 import CheckIn from "../components/CheckIn";
 import CheckOut from "../components/CheckOut";
-import { VenueContext } from "../context/RoomContext";
+import { VenueContext } from "../context/VenueContext";
 const BookForm = () => {
   const { handleClick } = useContext(VenueContext);
   return (

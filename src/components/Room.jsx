@@ -1,19 +1,20 @@
 import React from "react";
+
 //Link
 import { Link } from "react-router-dom";
 //icons
 import { BsArrowsFullscreen, BsPeople } from "react-icons/bs";
 
-const Venue = ({ venue }) => {
+const Venue = ( { venue } ) => {
   //destructure venue
-  const { id, name, image, size, maxGuests, description, price } = venue;
+  const { id, name, media, size, maxGuests, description, price } = venue;
   return (
     <div className="bg-white shadow-2xl min-h-[500px] group">
       {/* img */}
       <div className="overflow-hidden">
         <img
-          className="group-hover:scale-110 transition-all duration-300 w-full"
-          src={image}
+          className="group-hover:scale-110 transition-all duration-300 w-full aspect-[4/3]"
+          src={media[0]}
           alt=""
         />
       </div>
@@ -47,13 +48,13 @@ const Venue = ({ venue }) => {
       </div>
        {/* name & description */}
        <div className="text-center">
-        <Link to={`/venue/${id}`}>
+        <Link to={`/room/${id}`}>
           <h3 className="h3">{name}</h3>
         </Link>
         <p className="max-w-[300px] mx-auto mb-3 lg:mb-6">{description.slice(0, 56)}</p>
        </div>
        {/*btn */}
-       <Link to={`/venue/${id}`} className="btn btn-secondary btn-sm max-w-[240px] mx-auto">
+       <Link to={`/room/${id}`} className="btn btn-secondary btn-sm max-w-[240px] mx-auto">
         Book now from ${price}
        </Link>
     </div>
