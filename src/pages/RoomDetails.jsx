@@ -23,10 +23,15 @@ const RoomDetails = () => {
    }, []);
 
   const { venues } = useContext(VenueContext);
-  
+
+  if (venues.length !== 0) {
+    window.sessionStorage.setItem("venues", JSON.stringify(venues));
+  }
+  const stored = JSON.parse(window.sessionStorage.getItem("venues"));
+
   let { id } = useParams();
   //get room
-  const venue = venues.find((venue) => {
+  const venue = stored.find((venue) => {
     return venue.id === String(id);
   });
   

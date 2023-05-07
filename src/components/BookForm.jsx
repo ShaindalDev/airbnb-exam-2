@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 //components
-import AdultsDropdown from "../components/AdultsDropdown";
-import KidsDropdown from "../components/KidsDropdown";
-import CheckIn from "../components/CheckIn";
-import CheckOut from "../components/CheckOut";
+import AdultsDropdown from "./AdultsDropdown";
+import KidsDropdown from "./KidsDropdown";
+import CheckIn from "./CheckIn";
+import CheckOut from "./CheckOut";
 import { VenueContext } from "../context/VenueContext";
 const BookForm = () => {
   const { handleClick } = useContext(VenueContext);

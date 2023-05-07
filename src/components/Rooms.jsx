@@ -1,19 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 //context
-import { VenueContext } from "../context/VenueContext";
+import useVenues from "../hooks/useVenues";
 //components
-import Venue from "../components/Room";
+import Venue from "./Room";
 //Loader
 import { SpinnerDotted } from "spinners-react";
 
 const Venues = () => {
-  const { venues, loading } = useContext(VenueContext);
+  const { data, isLoading } = useVenues();
 
-  //  console.log(venues);
   return (
     <section id='myVenues' className='py-24'>
       {/* overlay */}
-      {loading && (
+      {isLoading && (
         <div className='h-screen fixed bottom-0 top-0 bg-black/90 w-full z-50 flex justify-center items-center'>
           <SpinnerDotted color='white' />
         </div>
@@ -27,7 +26,7 @@ const Venues = () => {
         </div>
         {/* grid */}
         <div className='grid grid-cols-1 max-w-sm mx-auto gap-[30px] lg:grid-cols-3 lg:max-w-none lg:mx-0'>
-          {venues.map((venue) => {
+          {data?.map((venue) => {
             return <Venue venue={venue} key={venue.id} />;
           })}
         </div>
