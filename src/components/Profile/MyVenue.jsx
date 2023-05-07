@@ -3,9 +3,9 @@ import React from "react";
 //Link
 import { Link } from "react-router-dom";
 //icons
-import { BsArrowsFullscreen, BsPeople } from "react-icons/bs";
+import { BsArrowsFullscreen, BsPeople, BsCurrencyDollar } from "react-icons/bs";
 
-const Venue = ( { venue  } ) => {
+const MyVenue = ( { venue  } ) => {
   //destructure venue
   const { id, name, media, size, maxGuests, description, price } = venue;
   return (
@@ -52,13 +52,17 @@ const Venue = ( { venue  } ) => {
           <h3 className="h3">{name}</h3>
         </Link>
         <p className="max-w-[300px] mx-auto mb-3 lg:mb-6">{description.slice(0, 56)}</p>
+        <div className="mb-4">
+            <BsCurrencyDollar className="mx-auto justify-center items-center"/>{price}
+        </div>
+           
        </div>
        {/*btn */}
-       <Link to={`/room/${id}`} className="btn btn-secondary btn-sm max-w-[240px] mx-auto">
-        Book now from ${price}
+       <Link to={`/room/${id}`} className="btn btn-secondary mb-3 btn-sm max-w-[150px] mx-auto">
+        Edit here
        </Link>
     </div>
   );
 };
 
-export default Venue;
+export default MyVenue;

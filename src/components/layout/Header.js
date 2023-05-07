@@ -6,7 +6,7 @@ import LogoDark from "../../assets/img/logo-dark.svg";
 import LogoWhite from "../../assets/img/logo-white.svg";
 import { getLocalStorageItem } from "../../js/getStorageItems";
 import LogOut from "../../js/logOut";
-import SearchFilter from "../SearchBar";
+import VenueSearch from "../VenueSearch";
 
 const Header = () => {
   const auth = useAuth();
@@ -45,7 +45,7 @@ const Header = () => {
             />
           )}
         </a>
-        <SearchFilter />
+        {/* <VenueSearch /> */}
         <nav
           className={`${
             header ? "text-primary" : "text-white"
@@ -72,10 +72,6 @@ const Header = () => {
               </Link>
             </Fragment>
           )}
-
-          {/* <a href="/contact" className="hover:text-accent transition">
-            Contact
-          </a> */}
         </nav>
       </div>
     </header>

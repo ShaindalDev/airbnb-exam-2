@@ -23,7 +23,6 @@ const Home = () => {
           testing
         </div>
       </div>
-
       <Rooms />
     </>
   );

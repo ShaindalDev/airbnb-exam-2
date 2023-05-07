@@ -20,7 +20,7 @@ const VenueProvider = ({ children }) => {
 
   useEffect(() => {
     
-    const getVenues = async () => {
+    const getVenues = async (id) => {
       try {
         const response = await axios.get('/venues');
         setVenues(response.data);
