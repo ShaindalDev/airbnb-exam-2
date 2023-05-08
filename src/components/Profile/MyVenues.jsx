@@ -1,6 +1,4 @@
-import React, {useContext, useState} from 'react';
-//context
-import { UserVenueContext } from '../../context/UserVenueContext';
+import React, { useContext, useState} from 'react';
 //components
 import MyVenue from './MyVenue';
 //Loader
