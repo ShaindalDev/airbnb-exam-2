@@ -17,13 +17,15 @@ import { AuthProvider } from './context/AuthContext1';
 import VenueProvider from './context/VenueContext';
 import Layout from './components/layout/Layout';
 import RequireAuth from './hooks/RequireAuth';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 
-const App = (props) => {
-  
+const App = () => {
+  const queryClient = new QueryClient();
   return <div>
     <AuthProvider>
       <VenueProvider>
+      <QueryClientProvider client={queryClient}>
         <Routes>
           <Route path="/" element={<Layout />}>
             {/* Public */}
@@ -40,6 +42,8 @@ const App = (props) => {
             </Route>
           </Route>
         </Routes>
+        <ReactQueryDevtools />
+        </QueryClientProvider>
       </VenueProvider>
     </AuthProvider>
   </div>;
