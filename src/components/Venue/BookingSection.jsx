@@ -5,42 +5,104 @@ import AdultsDropdown from "../AdultsDropdown";
 import KidsDropdown from "../KidsDropdown";
 import { FaCheck, FaPray } from "react-icons/fa";
 
-const BookingSection = ({ price }) => {
+import axios from "../../api/axios";
+
+const BOOKING_URL = "/bookings"
+
+const BookingSection = ({ venueId }) => {
+  
+  const [formData, setFormData] = useState({
+    dateFrom: "",
+    dateTo: "",
+    guests: 0,
+  })
+
+  const [submit, setSubmit] = useState(false);
+  const [isError, setIsError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
   const token = localStorage.getItem("ApiToken");
 
-  var authHeaders = new Headers();
-  authHeaders.append("Content-type", "application/json");
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: name === "guests" ? parseInt(value, 10) : value,
+    }))
+  };
 
-  authHeaders.append("Authorization", "Bearer " + token);
+          //form submit handler
+  async function onSubmit(event)  {
+    event.preventDefault();
+    setSubmit(true);
+    setIsError(false);
+    setSuccessMessage("");
+    console.log(event);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const bookingData = {
+      ...formData,
+      venueId: venueId,
+    };
 
-        const form = e.target;
+    console.log("Booking data", bookingData);
 
+    try {
+      const token = localStorage.getItem("ApiToken");
+      const response = await axios.post(
+        BOOKING_URL,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(bookingData),
+        }
+      );
+      if (response.ok) {
+        setSuccessMessage("Booking was successfull");
+        setFormData({
+          dateFrom: "",
+          dateTo: "",
+          guests: 1,
+        });
+      } else {
+        const errorData = await response.json();
+        console.error("Error data:", errorData);
+        setIsError(true);
+      }
+      console.log("response", response.data);
+    } catch (error) {
+      console.error("error", error);
+      setIsError(error.toString());
+    } finally {
+      setSubmit(false);
     }
+  }
+
+    
   return (
     <>
       <div className="w-full h-full lg:w-[40%]">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <div className="py-8 px-6 bg-accent/20 mb-12">
             <div className="flex flex-col space-y-4 mb-4">
               <h3>Your Reservation</h3>
               <div className="h-[60px]">
-                <CheckIn />
+                <CheckIn onChange={handleChange} value={formData.dateFrom} />
               </div>
               <div className="h-[60px]">
-                <CheckOut />
+                <CheckOut onChange={handleChange} value={formData.dateTo} />
               </div>
               <div className="h-[60px]">
-                <AdultsDropdown />
+                <AdultsDropdown 
+                onChange={handleChange} value={Number.isInteger(formData.guests) ? formData.guests : ""} />
               </div>
               <div className="h-[60px]">
-                <KidsDropdown />
+                <KidsDropdown 
+                onChange={handleChange} value={Number.isInteger(formData.guests) ? formData.guests : ""}/>
               </div>
             </div>
-            <button onSubmit={handleSubmit} className="btn btn-lg w-full btn-primary">
-              book now for ${price}
+            <button onSubmit={onSubmit} className="btn btn-lg w-full btn-primary">
+              book now
             </button>
           </div>
         </form>

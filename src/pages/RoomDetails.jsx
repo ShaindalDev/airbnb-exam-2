@@ -72,7 +72,7 @@ const RoomDetails = () => {
           </div>
           {/* right */}
           {/* <BookingCalender /> */}
-          <BookingSection id={id} price={price} />
+          <BookingSection id={id} price={price}  />
         </div>
       </div>
     </section>
