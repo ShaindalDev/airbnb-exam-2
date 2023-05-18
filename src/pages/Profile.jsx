@@ -15,6 +15,7 @@ import VenueProvider from "../context/VenueContext";
 import { useAuth } from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import MyBookings from "../components/Profile/MyBookings";
+import { VenueSearch } from "../hooks/searchHook";
 
 const Profile = () => {
   useEffect(() => {
@@ -59,6 +60,7 @@ const Profile = () => {
           <ProfileCard name={name}
           venueManager={data.venueManager}  />
       </section>
+      
       {/* Users bookings*/}
       <MyBookings data={data.bookings} />
       <VenueProvider />

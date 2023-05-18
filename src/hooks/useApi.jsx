@@ -41,7 +41,7 @@ const useApi = (endpoint, method, body) => {
       }
      }
      getData();
-    }, [endpoint, method, body]);
+    }, [url, endpoint, method, body]);
     return { data, isLoading, isError };
    };
    
