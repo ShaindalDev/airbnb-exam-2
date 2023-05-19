@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
 // Icons
@@ -17,11 +17,20 @@ const ProfileCard = ({ name, avatar, venueManager }) => {
   const localUserData = localStorage.getItem("UserProfile");
   const userData = JSON.parse(localUserData);
 
+  const [displayForm, setShowForm] = useState(false);
+
+  const showForm = () => {
+    setShowForm(!displayForm);
+  };
+
+ 
+
   useEffect(() => {});
   if (!name) {
     console.error(name);
     return <h1>There is no data available</h1>;
   }
+
 
   return (
     <>
@@ -99,10 +108,15 @@ const ProfileCard = ({ name, avatar, venueManager }) => {
                                   "group flex items-center px-4 py-2 text-sm"
                                 )}
                               >
-                                <PencilSquareIcon
+                                <PencilSquareIcon onClick={showForm}
                                   className='mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500'
                                   aria-hidden='true'
                                 />
+                                {displayForm && (
+                                  <form>
+                                    <input type="url" placeholder="URL link to profile image"></input>
+                                  </form>
+                                )}
                                 Change Avatar
                               </a>
                             )}

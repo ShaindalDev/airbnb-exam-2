@@ -6,7 +6,8 @@ import LogoDark from "../../assets/img/logo-dark.svg";
 import LogoWhite from "../../assets/img/logo-white.svg";
 import { getLocalStorageItem } from "../../js/getStorageItems";
 import LogOut from "../../js/logOut";
-import VenueSearch from "../SearchBar/VenueSearch";
+// import SearchBar from "./SearchBar/SearchBar";
+import { VenueSearch } from "../../hooks/searchHook";
 
 const Header = () => {
   const auth = useAuth();
@@ -45,7 +46,10 @@ const Header = () => {
             />
           )}
         </a>
-        {/* <VenueSearch /> */}
+        <div>
+          <VenueSearch />
+        </div>
+
         <nav
           className={`${
             header ? "text-primary" : "text-white"

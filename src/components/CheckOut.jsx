@@ -17,7 +17,10 @@ const CheckOut = () => {
         <BsCalendar className='text-accent text-base' />
       </div>
     </div>
-    <DatePicker className='w-full h-full' selected={endDate} placeholderText='Check out'
+    <DatePicker className='w-full h-full'
+    name='dateTo'
+    id='dateTo' 
+    selected={endDate} placeholderText='Check out'
     onChange={(date) => setEndDate(date)}
     />
   </div>
