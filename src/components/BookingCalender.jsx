@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
-
-// import DatePicker from 'react-date-picker';
+import React from "react";
+import { getDatesBetween } from "../js/getDatesBetween";
+import { useVenues } from "../hooks/useVenues"
+import { useQuery } from "@tanstack/react-query";
 
 const BookingCalender = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-
+  const [data] = useQuery();
+  const {}
   return (
-    <>
-      {/* <DatePicker */}
-      selected={startDate}
-      onChange={(date) => setStartDate(date)}
-      />
-      {/* <DatePicker */}
-      value={endDate}
-      onChange={(date) => setEndDate(date)}
-      />
-    </>
-  );
-};
+    <div>
+      <DatePicker
+        selected={startDate}
+        onChange={onChange}
+        startDate={startDate}
+        endDate={endDate}
+        excludeDates={[bookedDates]}
+        selectsRange
+        selectsDisabledDaysInRange
+        inline
+    />
+    </div>
+  )
+}
 
-export default BookingCalender;
+export default BookingCalender
