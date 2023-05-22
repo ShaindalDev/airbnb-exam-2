@@ -17,7 +17,7 @@ export const SearchBar = ({ data }) => {
         )
       : [];
     setFilteredData(newData);
-    setHasInput(value !== '');
+    setHasInput(value !=='');
   };
 
   const handleDocumentClick = (event) => {
@@ -43,12 +43,10 @@ export const SearchBar = ({ data }) => {
 
 return (
     <>
-    <label htmlFor='search'></label>
       <input
-        type="text"
+        type="search"
         placeholder="Search for a venue..."
         value={query}
-        name='search'
         onChange={handleInputChange}
         className="w-full md:w-60 h-8 p-1 rounded-md outline outline-1"
       />
@@ -56,7 +54,7 @@ return (
         className={`absolute pt-1 w-4/12 ${hasInput ? 'bg-topaz/90' : ''}`}
         ref={searchResultsRef}
       >
-        <ul className="w-100 rounded-md px-3 py-2 mt-15  bg-white flex flex-col overflow-y-hidden  divide-y divide-gray-300">
+        <ul className="w-100 rounded-md px-3 py-2  bg-white flex flex-col overflow-y-hidden mt-2 divide-y divide-gray-300">
           {filteredData.map((item) => (
             <li
               key={item.id}
@@ -107,6 +105,20 @@ return (
 
 // export default function SearchBar() {
 //     const [search, setSearch] = useState('');
+
+//     const debouncedSearchTerm = useDebounce(search, 200)
+//     const {data, isLoading, error} = useQuery({
+//         queryKey: ['sort', debouncedSearchTerm],
+//         queryFn:
+//          () => {
+//             console.log('fetching')
+//             if (debouncedSearchTerm) {
+//                 return fetch(`https://api.noroff.dev/api/v1/holidaze/venues?sort=${debouncedSearchTerm}`).then(res => res.json())
+//              }
+//              return {venues: []}
+//         }
+//     })
+
 
 //     const debouncedSearchTerm = useDebounce(search, 200)
 //     const {data, isLoading, error} = useQuery({

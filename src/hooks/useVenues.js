@@ -1,5 +1,5 @@
-import React from "react";
-import { Axios } from "axios";
+// Tanstack-Query used for statemanagement for API request queries.
+// https://tanstack.com/query/v4/docs/react/overview
 import { useQuery, QueryCache } from "@tanstack/react-query";
 import axios from "../api/axios";
 
