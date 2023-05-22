@@ -7,6 +7,7 @@ import {
   PencilSquareIcon,
   ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/20/solid";
+import UpdateAvatar from "./UpdateAvatar";
 // Axios
 
 function classNames(...classes) {
@@ -23,14 +24,11 @@ const ProfileCard = ({ name, avatar, venueManager }) => {
     setShowForm(!displayForm);
   };
 
- 
-
   useEffect(() => {});
   if (!name) {
     console.error(name);
     return <h1>There is no data available</h1>;
   }
-
 
   return (
     <>
@@ -108,15 +106,10 @@ const ProfileCard = ({ name, avatar, venueManager }) => {
                                   "group flex items-center px-4 py-2 text-sm"
                                 )}
                               >
-                                <PencilSquareIcon onClick={showForm}
+                                <PencilSquareIcon
                                   className='mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500'
                                   aria-hidden='true'
                                 />
-                                {displayForm && (
-                                  <form>
-                                    <input type="url" placeholder="URL link to profile image"></input>
-                                  </form>
-                                )}
                                 Change Avatar
                               </a>
                             )}

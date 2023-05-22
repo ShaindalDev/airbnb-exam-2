@@ -8,7 +8,7 @@ export const venues = "/venues";
 export const profiles = "/profiles";
 export const bookings = "/bookings";
 
-export const getVenue = API_URL + venues;
+export const getVenue = `${API_URL} + ${venues}`;
 
 //Dummy test api for dev purpose
 export const dummyAPI = "https://dummyjson.com/products/1";

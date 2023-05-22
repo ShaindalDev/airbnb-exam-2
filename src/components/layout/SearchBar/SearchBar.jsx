@@ -119,3 +119,16 @@ return (
 //         }
 //     })
 
+
+//     const debouncedSearchTerm = useDebounce(search, 200)
+//     const {data, isLoading, error} = useQuery({
+//         queryKey: ['sort', debouncedSearchTerm],
+//         queryFn:
+//          () => {
+//             console.log('fetching')
+//             if (debouncedSearchTerm) {
+//                 return fetch(`https://api.noroff.dev/api/v1/holidaze/venues?sort=${debouncedSearchTerm}`).then(res => res.json())
+//              }
+//              return {venues: []}
+//         }
+//     })

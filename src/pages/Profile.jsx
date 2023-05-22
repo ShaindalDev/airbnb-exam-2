@@ -11,6 +11,7 @@ import MyVenues from "../components/Profile/MyVenues";
 import ProfileCard from "../components/Profile/ProfileCard";
 import VenueProvider from "../context/VenueContext";
 import MyBookings from "../components/Profile/MyBookings";
+import { VenueSearch } from "../hooks/searchHook";
 
 const Profile = () => {
   useEffect(() => {
@@ -54,6 +55,7 @@ const Profile = () => {
           {/* User info */}
           <ProfileCard name={name} venueManager={data.venueManager} />
         </section>
+
         {/* Users bookings*/}
         <MyBookings data={data.bookings} />
         <VenueProvider />
@@ -66,4 +68,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
