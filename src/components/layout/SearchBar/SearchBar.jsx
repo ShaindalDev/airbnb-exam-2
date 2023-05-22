@@ -17,7 +17,7 @@ export const SearchBar = ({ data }) => {
         )
       : [];
     setFilteredData(newData);
-    setHasInput(value !== '');
+    setHasInput(value !=='');
   };
 
   const handleDocumentClick = (event) => {
