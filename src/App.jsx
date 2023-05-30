@@ -18,6 +18,7 @@ import VenueProvider from './context/VenueContext';
 import Layout from './components/layout/Layout';
 import RequireAuth from './hooks/RequireAuth';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import EditVenueDetails from './pages/EditVenue';
 
 
 const App = () => {
@@ -35,10 +36,12 @@ const App = () => {
             <Route path='/contact' element={<Contact />} />
             <Route path='/room/:id' element={<RoomDetails />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/editVenue/:id' element={<EditVenueDetails />} />
             {/* auth protected routes, requires registered profile*/}
             <Route element={<RequireAuth />}>
               
               <Route path='/contact' element={<Contact />} />
+              
             </Route>
           </Route>
         </Routes>

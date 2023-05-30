@@ -57,7 +57,8 @@ const Profile = () => {
       
       <section className="mt-14">
         {/* User info */}
-          <ProfileCard name={name}
+          <ProfileCard name={data.name}
+          avatar={data.avatar}
           venueManager={data.venueManager}  />
       </section>
       

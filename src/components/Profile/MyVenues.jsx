@@ -9,6 +9,7 @@ import {SpinnerDotted} from 'spinners-react';
 const Venues = ({ data }) => {
   const [loading, setisLoading] = useState(false);
   if (!data) {
+    console.log(data)
     return <h1>There is no Venues to display!</h1>
   }
 
