@@ -8,7 +8,7 @@ import axios from "../../api/axios";
 
 const CREATE_URL = "/venues";
 
-export default function CreateNewVenue() {
+export default function EditMyVenue() {
   
   const [submit, setSubmit] = useState(false);
   const [isError, setIsError] = useState(null);
@@ -68,7 +68,7 @@ export default function CreateNewVenue() {
     console.log(data);
     const token = localStorage.getItem("ApiToken");
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         CREATE_URL,
         {
           name: data.name,
@@ -99,7 +99,7 @@ export default function CreateNewVenue() {
     <>
       <section id='createNewVenue' className='py-12'>
         <div className='mx-auto py-8 px-5 border border-gray-300 mb-12 pb-4 shadow-lg shadow-gray-400 max-w-7xl justify-center items-center'>
-          <h1 className='font-extrabold text-lg py-2'>Create a new venue</h1>
+          <h1 className='font-extrabold text-lg py-2'>Edit </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='space-y-12'>
               <div className='border-b border-gray-900/10 pb-12'>

@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@headlessui/react": "^1.7.5",
+    "@tanstack/eslint-plugin-query": "^4.29.4",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
     "react-datepicker": "^4.12.0",

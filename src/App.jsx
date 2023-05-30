@@ -1,15 +1,14 @@
-import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 //components
 
 //pages
 import Home from "./pages/Home";
 import RoomDetails from "./pages/RoomDetails";
-import SignIn from './pages/SignIn';
-import Register from './pages/Register';
-import Profile from './pages/Profile';
-import Contact from './pages/Contact';
-
+import SignIn from "./pages/SignIn";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import Contact from "./pages/Contact";
 
 // react router
 import { Route, Routes} from "react-router-dom";
