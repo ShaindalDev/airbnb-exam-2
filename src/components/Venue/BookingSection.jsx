@@ -1,64 +1,113 @@
-import React, { useState } from "react";
-import CheckIn from "../CheckIn";
-import CheckOut from "../CheckOut";
-import AdultsDropdown from "../AdultsDropdown";
-import KidsDropdown from "../KidsDropdown";
-import { FaCheck, FaPray } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
 
-import axios from "../../api/axios";
+import { API_URL, bookings, venues } from "../../api/constants";
 
-const BOOKING_URL = "/bookings"
+import DatePicker from "react-datepicker";
 
-const BookingSection = ({ venueId }) => {
-  
+import "react-datepicker/dist/react-datepicker.css";
+import { BsCalendar, BsChevronDown } from "react-icons/bs";
+import { Menu } from "@headlessui/react";
+
+const lis = [{ name: "1" }, { name: "2" }, { name: "3" }];
+
+function CalenderBooking({ venueId }) {
+  const [guests, setGuests] = useState();
   const [formData, setFormData] = useState({
     dateFrom: "",
     dateTo: "",
-    guests: 0,
-  })
-
-  const [submit, setSubmit] = useState(false);
-  const [isError, setIsError] = useState(null);
+    guests: 1,
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
-  const token = localStorage.getItem("ApiToken");
+  const [bookedDates, setBookedDates] = useState([]);
+  const [maxCheckOutDate, setMaxCheckOutDate] = useState(null);
 
-  const handleChange = (event) => {
+  useEffect(() => {
+    const fetchBookedDates = async () => {
+      try {
+        const token = localStorage.getItem("ApiToken");
+        if (!venueId) {
+          return; // If venueId is undefined, exit the function to prevent the API request
+        }
+        const response = await fetch(
+          API_URL + venues + `/${venueId}?_bookings=true&_owner=true`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const bookedData = await response.json();
+          bookedData.bookings.sort(
+            (a, b) => new Date(a.dateFrom) - new Date(b.dateFrom)
+          );
+          setBookedDates(bookedData.bookings);
+        } else {
+          console.error("Error:", response.status);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchBookedDates();
+  }, [venueId]);
+
+  const handleCheckInChange = (date) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      dateFrom: date,
+    }));
+
+    const nextBookedDate = bookedDates.find(
+      (booking) => new Date(booking.dateFrom) > date
+    );
+
+    if (nextBookedDate) {
+      setMaxCheckOutDate(new Date(nextBookedDate.dateFrom));
+    } else {
+      setMaxCheckOutDate(null);
+    }
+  };
+
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: name === "guests" ? parseInt(value, 10) : value,
-    }))
+    }));
   };
 
-          //form submit handler
-  async function onSubmit(event)  {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmit(true);
+    setIsSubmitting(true);
     setIsError(false);
     setSuccessMessage("");
-    console.log(event);
 
     const bookingData = {
       ...formData,
       venueId: venueId,
     };
 
-    console.log("Booking data", bookingData);
+    console.log("Booking information:", bookingData);
 
     try {
       const token = localStorage.getItem("ApiToken");
-      const response = await axios.post(
-        BOOKING_URL,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(bookingData),
-        }
-      );
+
+      const response = await fetch(API_URL + bookings, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(bookingData),
+      });
+
       if (response.ok) {
-        setSuccessMessage("Booking was successfull");
+        setSuccessMessage("BOOKING SUCCESSFUL!");
         setFormData({
           dateFrom: "",
           dateTo: "",
@@ -69,64 +118,110 @@ const BookingSection = ({ venueId }) => {
         console.error("Error data:", errorData);
         setIsError(true);
       }
-      console.log("response", response.data);
     } catch (error) {
-      console.error("error", error);
-      setIsError(error.toString());
-    } finally {
-      setSubmit(false);
+      console.error("Error:", error);
+      setIsError(true);
     }
-  }
 
-    
+    setIsSubmitting(false);
+  };
+
   return (
     <>
-      <div className="w-full h-full lg:w-[40%]">
-        <form onSubmit={onSubmit}>
-          <div className="py-8 px-6 bg-accent/20 mb-12">
-            <div className="flex flex-col space-y-4 mb-4">
-              <h3>Your Reservation</h3>
-              <div className="h-[60px]">
-                <CheckIn onChange={handleChange} value={formData.dateFrom} />
+      <div className='w-full h-full lg:w-[40%]'>
+        <form onSubmit={handleSubmit}>
+          <div className='py-8 px-6 bg-accent/20 mb-12'>
+            <div className='flex flex-col space-y-4 mb-4'>
+              <h2 className='text-xl leading-snug justify-center font-semibold'>
+                Book now
+              </h2>
+              {/* check in */}
+              <div className='h-[60px]'>
+                <div className='relative flex items-center justify-end h-full'>
+                  <div className='absolute z-10 pr-8'>
+                    <div>
+                      <BsCalendar className='text-accent text-base' />
+                    </div>
+                  </div>
+                  <label htmlFor='dateFrom'>Check In</label>
+                  <DatePicker
+                    selected={formData.dateFrom}
+                    minDate={new Date()}
+                    excludeDates={bookedDates.map(
+                      (booking) => new Date(booking.dateFrom)
+                    )}
+                    onChange={handleCheckInChange}
+                    className='form-control w-full h-full'
+                  />
+                </div>
               </div>
-              <div className="h-[60px]">
-                <CheckOut onChange={handleChange} value={formData.dateTo} />
+              {/* check out */}
+              <div className='h-[60px]'>
+                <div className='relative flex items-center justify-end h-full'>
+                  <div className='absolute z-10 pr-8'>
+                    <div>
+                      <BsCalendar className='text-accent text-base' />
+                    </div>
+                  </div>
+                  <label htmlFor='dateTo'>Check Out</label>
+                  <DatePicker
+                    selected={formData.dateTo}
+                    excludeDates={bookedDates.map(
+                      (booking) => new Date(booking.dateFrom)
+                    )}
+                    minDate={formData.dateFrom || new Date()}
+                    maxDate={maxCheckOutDate}
+                    onChange={(date) =>
+                      setFormData((prevFormData) => ({
+                        ...prevFormData,
+                        dateTo: date,
+                      }))
+                    }
+                    className='form-control w-full h-full'
+                  />
+                </div>
               </div>
-              <div className="h-[60px]">
-                <AdultsDropdown 
-                onChange={handleChange} value={Number.isInteger(formData.guests) ? formData.guests : ""} />
-              </div>
-              <div className="h-[60px]">
-                <KidsDropdown 
-                onChange={handleChange} value={Number.isInteger(formData.guests) ? formData.guests : ""}/>
+              <div className='h-[60px]'>
+                <div className='relative flex items-center justify-end h-full'>
+                  <input
+                    type='number'
+                    className='form-control w-full h-1/2 p-3'
+                    id='guests'
+                    name='guests'
+                    value={
+                      Number.isInteger(formData.guests) ? formData.guests : ""
+                    }
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
               </div>
             </div>
-            <button onSubmit={onSubmit} className="btn btn-lg w-full btn-primary">
-              book now
+            <button
+              type='submit'
+              className='btn btn-lg w-full btn-primary'
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting..." : "Book Now"}
             </button>
+            {isError && (
+              <div
+                className=' px-2 bg-red-300 border border-red-600 mt-3 font-medium tracking-wide'
+                role='alert'
+              >
+                Something went wrong, please try again
+              </div>
+            )}
+            {successMessage && (
+              <div className='px-2 bg-green-300 border border-green-600 mt-3 font-medium tracking-wide' role='alert'>
+                {successMessage}
+              </div>
+            )}
           </div>
         </form>
-        {/* rules '*/}
-        <div>
-          <h3 className="h3">Venue Rules</h3>
-          <ul className="flex flex-col gap-y-4">
-            <li className="flex items-center gap-x-4">
-              <FaCheck className="text-accent" />
-              Check-in: 3.00 PM - 9-00 PM
-            </li>
-            <li className="flex items-center gap-x-4">
-              <FaCheck className="text-accent" />
-              Check-out: 11.00 AM
-            </li>
-            <li className="flex items-center gap-x-4">
-              <FaCheck className="text-accent" />
-              No Smoking
-            </li>
-          </ul>
-        </div>
       </div>
     </>
   );
-};
+}
 
-export default BookingSection;
+export default CalenderBooking;

@@ -9,7 +9,7 @@ import ProfileNavigation from "../components/ProfileNavigation";
 import CreateNewVenue from "../components/Profile/CreateVenue";
 import MyVenues from "../components/Profile/MyVenues";
 import ProfileCard from "../components/Profile/ProfileCard";
-import VenueProvider from "../context/VenueContext";
+
 import MyBookings from "../components/Profile/MyBookings";
 import { VenueSearch } from "../hooks/searchHook";
 
@@ -60,7 +60,7 @@ const Profile = () => {
       
       {/* Users bookings*/}
       <MyBookings data={data.bookings} />
-      <VenueProvider />
+      
       <MyVenues data={data.venues} />
       
         <CreateNewVenue />

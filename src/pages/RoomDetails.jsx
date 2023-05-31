@@ -16,6 +16,7 @@ import VenueDescription from "../components/Venue/VenueDescription";
 //context
 import { VenueContext } from "../context/VenueContext";
 import BookingCalender from "../components/BookingCalender";
+import CalenderBooking from "../components/BookingCalender";
 //icons
 
 const RoomDetails = () => {
@@ -71,8 +72,8 @@ const RoomDetails = () => {
             <VenueMediaGallery media={media} />
           </div>
           {/* right */}
-          {/* <BookingCalender /> */}
-          <BookingSection id={id} price={price}  />
+          {/* <CalenderBooking venueId={venue.id} /> */}
+          <BookingSection venueId={venue.id}  />
         </div>
       </div>
     </section>
