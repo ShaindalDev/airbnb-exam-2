@@ -151,7 +151,7 @@ function CalenderBooking({ venueId }) {
                       (booking) => new Date(booking.dateFrom)
                     )}
                     onChange={handleCheckInChange}
-                    className='form-control w-full h-full'
+                    className='w-full h-full'
                   />
                 </div>
               </div>
@@ -177,7 +177,7 @@ function CalenderBooking({ venueId }) {
                         dateTo: date,
                       }))
                     }
-                    className='form-control w-full h-full'
+                    className='w-1/2 h-full'
                   />
                 </div>
               </div>
@@ -185,7 +185,7 @@ function CalenderBooking({ venueId }) {
                 <div className='relative flex items-center justify-end h-full'>
                   <input
                     type='number'
-                    className='form-control w-full h-1/2 p-3'
+                    className='w-full h-1/2 p-3'
                     id='guests'
                     name='guests'
                     value={
