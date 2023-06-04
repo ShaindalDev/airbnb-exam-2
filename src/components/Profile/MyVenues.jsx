@@ -7,6 +7,7 @@ import MyVenue from "./MyVenue";
 import { SpinnerDotted } from "spinners-react";
 
 const Venues = ({ data }) => {
+  // eslint-disable-next-line
   const [loading, setisLoading] = useState(false);
   if (!data) {
     return <h1>There is no Venues to display!</h1>;
