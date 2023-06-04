@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 //context
 
 //components
@@ -9,11 +9,8 @@ import { SpinnerDotted } from "spinners-react";
 const Venues = ({ data }) => {
   const [loading, setisLoading] = useState(false);
   if (!data) {
-    console.log(data)
-    return <h1>There is no Venues to display!</h1>
+    return <h1>There is no Venues to display!</h1>;
   }
-
-  //  console.log(venues);
   return (
     <section id='myVenues' className='py-24'>
       {/* overlay */}

@@ -1,4 +1,4 @@
-import { useState, useNavigate, useContext } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 //yup form validation import
 import * as yup from "yup";
@@ -9,7 +9,6 @@ import axios from "../../api/axios";
 const CREATE_URL = "/venues";
 
 export default function CreateNewVenue() {
-  
   const [submit, setSubmit] = useState(false);
   const [isError, setIsError] = useState(null);
   const [venueImage, setVenueImage] = useState([]);
@@ -62,7 +61,6 @@ export default function CreateNewVenue() {
 
   //form submit handler
   async function onSubmit(data) {
-
     setSubmit(true);
     setIsError(null);
     console.log(data);
@@ -174,7 +172,7 @@ export default function CreateNewVenue() {
                           {...register("media")}
                           name='venueImage'
                           value={venueImage}
-                          multiple="multiple"
+                          multiple='multiple'
                           id='media'
                           className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                           placeholder='...formated url only'
@@ -341,13 +339,15 @@ export default function CreateNewVenue() {
             <div className='mt-6 flex items-center justify-end gap-x-6'>
               <button
                 type='reset'
-                value="Reset"
+                value='Reset'
                 className='text-sm font-semibold leading-6 text-gray-900'
               >
                 Cancel
               </button>
-              <button className='rounded-md bg-accent/70 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-              type="submit">
+              <button
+                className='rounded-md bg-accent/70 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                type='submit'
+              >
                 Create
               </button>
             </div>
