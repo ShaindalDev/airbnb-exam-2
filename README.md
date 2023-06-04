@@ -1,4 +1,4 @@
-# Holidayze
+# Holidaze
 Welcome to Holidaze a site for luxury AirBnB accommodations. 
 This project is final exam project from Noroff to display and showcase what i have learned the last 2 years of being a FrontEnd developer student.
 
