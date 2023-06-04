@@ -1,110 +1,127 @@
-import { useState, useNavigate, useContext } from "react";
-import { useForm } from "react-hook-form";
-//yup form validation import
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useState, useEffect } from "react";
 
-import axios from "../../api/axios";
+import { useParams } from "react-router";
 
-const CREATE_URL = "/venues";
+const UPDATE_VENUE_URL = "https://api.noroff.dev/api/v1/holidaze/venues";
 
-export default function CreateNewVenue() {
-  
-  const [submit, setSubmit] = useState(false);
-  const [isError, setIsError] = useState(null);
-  const [venueImage, setVenueImage] = useState([]);
-
-  const [venueMeta, setVenueMeta] = useState({
-    wifi: false,
-    parking: false,
-    breakfast: false,
-    pets: false,
+export default function EditMyVenue() {
+  const { id } = useParams();
+  const [media, setMedia] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [venue, setVenue] = useState({
+    name: "",
+    description: "",
+    price: 0,
+    maxGuests: 0,
+    meta: {
+      wifi: false,
+      parking: false,
+      breakfast: false,
+      pets: false,
+    },
   });
 
-  const [venueLocation, setVenueLocation] = useState({
-    adddress: "",
-    city: "",
-    zip: "",
-    country: "",
-    lat: 0,
-    lng: 0,
-  });
+  useEffect(() => {
+    async function fetchData() {
+      setIsLoading(true); 
+      setIsError(false); 
 
-  const handleMetaChange = (metaKey) => {
-    setVenueMeta((prevState) => ({
-      ...prevState,
-      [metaKey]: !prevState[metaKey],
-    }));
+      try {
+        const response = await fetch(UPDATE_VENUE_URL + `/${id}`);
+        const json = await response.json();
+        setVenue(json);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false); 
+      }
+    }
+
+    fetchData();
+  }, [id]);
+
+  if (isLoading) {
+    return <div>Loading venue details...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading data</div>;
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const token = localStorage.getItem("ApiToken");
+    console.log("ApiToken:", token);
+
+    const updatedVenue = {
+      name: venue.name,
+      description: venue.description,
+      price: parseInt(venue.price),
+      maxGuests: parseInt(venue.maxGuests),
+      rating: 0,
+      meta: venue.meta,
+      location: venue.location,
+    };
+
+    if (media) {
+      updatedVenue.media = [media];
+    }
+
+    try {
+      console.log(JSON.stringify(updatedVenue));
+      const response = await fetch(UPDATE_VENUE_URL + `/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedVenue),
+      });
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const validationSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required("Name is required")
-      .min(5, "Name must be atleast 5 characters"),
-    description: yup
-      .string()
-      .required("Description is required")
-      .min(10, "Description must be atleast 10 characters"),
-    price: yup.number().required("A price is required, must be number"),
-    maxGuests: yup
-      .number()
-      .required("Max guests is required, must be a number"),
-  });
+  const handleChange = (event) => {
+    const { name, value, checked, type } = event.target;
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationSchema),
-  });
-
-  //form submit handler
-  async function onSubmit(data) {
-
-    setSubmit(true);
-    setIsError(null);
-    console.log(data);
-    const token = localStorage.getItem("ApiToken");
-    try {
-      const response = await axios.post(
-        CREATE_URL,
-        {
-          name: data.name,
-          description: data.description,
-          media: [...venueImage],
-          price: data.price,
-          maxGuests: data.maxGuests,
-          meta: venueMeta,
-          location: venueLocation,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log("response", response.data);
-    } catch (error) {
-      console.log("error", error);
-      setIsError(error.toString());
-    } finally {
-      setSubmit(false);
+    if (type === "checkbox") {
+      setVenue((prevState) => ({
+        ...prevState,
+        meta: { ...prevState.meta, [name]: checked },
+      }));
+    } else if (name.startsWith("location")) {
+      const locationKey = name.split(".")[1];
+      setVenue((prevState) => ({
+        ...prevState,
+        location: { ...prevState.location, [locationKey]: value },
+      }));
+    } else {
+      setVenue((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
-  }
+  };
+
+  const handleMediaChange = (event) => {
+    setMedia(event.target.value);
+  };
 
   return (
     <>
-      <section id='createNewVenue' className='py-12'>
+      <section id='editVenue' className='py-12'>
         <div className='mx-auto py-8 px-5 border border-gray-300 mb-12 pb-4 shadow-lg shadow-gray-400 max-w-7xl justify-center items-center'>
-          <h1 className='font-extrabold text-lg py-2'>Create a new venue</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <h1 className='font-extrabold text-lg py-2'>Edit </h1>
+          <form onSubmit={handleSubmit}>
             <div className='space-y-12'>
               <div className='border-b border-gray-900/10 pb-12'>
                 <h2 className='text-base font-semibold leading-7 text-gray-900'>
-                  New Venue
+                  Edit Venue
                 </h2>
                 <div className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
                   <div className='sm:col-span-4'>
@@ -118,18 +135,13 @@ export default function CreateNewVenue() {
                       <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
                         <input
                           type='text'
-                          {...register("name")}
+                          value={venue.name || ""}
                           name='name'
                           id='name'
                           className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                           placeholder='ie. CherryHeaven avenue'
                         />
                       </div>
-                      {errors && errors.name && (
-                        <p className='text-xs italic text-red-500'>
-                          {errors.name.message}
-                        </p>
-                      )}
                     </div>
                   </div>
 
@@ -144,16 +156,11 @@ export default function CreateNewVenue() {
                       <textarea
                         id='description'
                         name='description'
-                        {...register("description")}
+                        value={venue.description || ""}
                         rows={3}
                         className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                         defaultValue={""}
                       />
-                      {errors && errors.description && (
-                        <p className='text-xs italic text-red-500'>
-                          {errors.description.message}
-                        </p>
-                      )}
                     </div>
                     <p className='mt-3 text-sm leading-6 text-gray-600'>
                       Write a few sentences about the venue.
@@ -171,14 +178,13 @@ export default function CreateNewVenue() {
                       <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
                         <input
                           type='text'
-                          {...register("media")}
                           name='venueImage'
-                          value={venueImage}
-                          multiple="multiple"
+                          value={media || ""}
+                          multiple='multiple'
                           id='media'
                           className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                           placeholder='...formated url only'
-                          onChange={(e) => setVenueImage(e.target.value)}
+                          onChange={handleMediaChange}
                         />
                       </div>
                     </div>
@@ -195,18 +201,13 @@ export default function CreateNewVenue() {
                       <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
                         <input
                           type='number'
-                          {...register("price")}
+                          value={venue.price || ""}
                           name='price'
                           id='price'
                           className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                           placeholder='price here'
                         />
                       </div>
-                      {errors && errors.price && (
-                        <p className='text-xs italic text-red-500'>
-                          {errors.price.message}
-                        </p>
-                      )}
                     </div>
                   </div>
                   {/* max Guests*/}
@@ -221,18 +222,13 @@ export default function CreateNewVenue() {
                       <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
                         <input
                           type='number'
-                          {...register("maxGuests")}
+                          value={venue.maxGuests || ""}
                           name='maxGuests'
                           id='maxGuests'
                           className='block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
                           placeholder='max guests here'
                         />
                       </div>
-                      {errors && errors.maxGuests && (
-                        <p className='text-xs italic text-red-500'>
-                          {errors.maxGuests.message}
-                        </p>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -253,10 +249,9 @@ export default function CreateNewVenue() {
                           <input
                             id='venueMetaWifi'
                             name='venueMetaWifi'
-                            {...register("wifi")}
                             type='checkbox'
-                            checked={venueMeta.wifi}
-                            onChange={(e) => handleMetaChange("wifi")}
+                            checked={venue.meta.wifi || ""}
+                            onChange={handleChange}
                             className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                           />
                         </div>
@@ -274,10 +269,9 @@ export default function CreateNewVenue() {
                           <input
                             id='venueMetaParking'
                             name='venueMetaParking'
-                            {...register("parking")}
                             type='checkbox'
-                            checked={venueMeta.parking}
-                            onChange={(e) => handleMetaChange("parking")}
+                            checked={venue.meta.parking || ""}
+                            onChange={handleChange}
                             className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                           />
                         </div>
@@ -295,10 +289,9 @@ export default function CreateNewVenue() {
                           <input
                             id='venueMetaBreakfast'
                             name='venueMetaBreakfast'
-                            {...register("breakfast")}
                             type='checkbox'
-                            checked={venueMeta.breakfast}
-                            onChange={(e) => handleMetaChange("breakfast")}
+                            checked={venue.meta.breakfast || ""}
+                            onChange={handleChange}
                             className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                           />
                         </div>
@@ -316,10 +309,9 @@ export default function CreateNewVenue() {
                           <input
                             id='venueMetaPets'
                             name='venueMetaPets'
-                            {...register("pets")}
                             type='checkbox'
-                            checked={venueMeta.pets}
-                            onChange={(e) => handleMetaChange("pets")}
+                            checked={venue.meta.pets || ""}
+                            onChange={handleChange}
                             className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                           />
                         </div>
@@ -341,13 +333,15 @@ export default function CreateNewVenue() {
             <div className='mt-6 flex items-center justify-end gap-x-6'>
               <button
                 type='reset'
-                value="Reset"
+                value='Reset'
                 className='text-sm font-semibold leading-6 text-gray-900'
               >
                 Cancel
               </button>
-              <button className='rounded-md bg-accent/70 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-              type="submit">
+              <button
+                className='rounded-md bg-accent/70 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-accent/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                type='submit'
+              >
                 Create
               </button>
             </div>

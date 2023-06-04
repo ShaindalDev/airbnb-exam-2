@@ -1,23 +1,18 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 //context
-
+import useVenues from "../hooks/useVenues";
 //components
-import MyVenue from "./MyVenue";
+import Venue from "./Room";
 //Loader
 import { SpinnerDotted } from "spinners-react";
 
-const Venues = ({ data }) => {
-  const [loading, setisLoading] = useState(false);
-  if (!data) {
-    console.log(data)
-    return <h1>There is no Venues to display!</h1>
-  }
+const Venues = () => {
+  const { data, isLoading } = useVenues();
 
-  //  console.log(venues);
   return (
     <section id='myVenues' className='py-24'>
       {/* overlay */}
-      {loading && (
+      {isLoading && (
         <div className='h-screen fixed bottom-0 top-0 bg-black/90 w-full z-50 flex justify-center items-center'>
           <SpinnerDotted color='white' />
         </div>
@@ -25,14 +20,14 @@ const Venues = ({ data }) => {
       <div className='container mx-auto lg:px-0'>
         <div className='text-center'>
           <div className='font-tertiarty uppercase text-[15px] tracking-[6px]'>
-            Your venues
+            Luxury for rent Holidayze
           </div>
           <h2 className='font-primary text-[45px] mb-4'>Apartments & Cabins</h2>
         </div>
         {/* grid */}
         <div className='grid grid-cols-1 max-w-sm mx-auto gap-[30px] lg:grid-cols-3 lg:max-w-none lg:mx-0'>
-          {data.map((venue) => {
-            return <MyVenue venue={venue} key={venue.id} />;
+          {data?.map((venue) => {
+            return <Venue venue={venue} key={venue.id} />;
           })}
         </div>
       </div>

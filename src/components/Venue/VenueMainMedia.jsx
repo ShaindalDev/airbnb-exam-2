@@ -4,7 +4,7 @@ const VenueMainMedia = ({ media }) => {
     
   return (
     <div className='mb-8'>
-      <img src={media[0]} alt=""/>
+      <img src={media} alt=""/>
     </div>
   )
 }

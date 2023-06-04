@@ -1,11 +1,17 @@
 import React from "react";
-
-//Link
 import { Link } from "react-router-dom";
-//icons
-import { BsArrowsFullscreen, BsPeople } from "react-icons/bs";
+//Tanstack useQuery imports
+import useDeleteVenue from "../../hooks/useDeleteVenue";
 
-const Venue = ({ venue }) => {
+//icons
+import { BsArrowsFullscreen, BsPeople, BsCurrencyDollar } from "react-icons/bs";
+
+const MyVenue = ({ venue }) => {
+  const [deleteVenue] = useDeleteVenue();
+
+  const onDelete = async () => {
+    await deleteVenue(id);
+  };
   //destructure venue
   const { id, name, media, size, maxGuests, description, price } = venue;
   return (
@@ -54,16 +60,26 @@ const Venue = ({ venue }) => {
         <p className='max-w-[300px] mx-auto mb-3 lg:mb-6'>
           {description.slice(0, 56)}
         </p>
+        <div className='mb-4'>
+          <BsCurrencyDollar className='mx-auto justify-center items-center' />
+          {price}
+        </div>
       </div>
       {/*btn */}
       <Link
         to={`/room/${id}`}
-        className='btn btn-secondary btn-sm max-w-[240px] mx-auto'
+        className='btn btn-secondary mb-3 btn-sm max-w-[150px] mx-auto'
       >
-        Book now from ${price}
+        Edit here
       </Link>
+      <button
+        onClick={onDelete}
+        className='btn btn-secondary mb-3 btn-sm max-w-[150px] mx-auto'
+      >
+        Delete Venue
+      </button>
     </div>
   );
 };
 
-export default Venue;
+export default MyVenue;

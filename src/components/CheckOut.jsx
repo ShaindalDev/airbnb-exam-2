@@ -7,8 +7,8 @@ import '../datepicker.css';
 //icons
 import { BsCalendar } from 'react-icons/bs';
 
-const CheckIn = () => {
-  const [startDate, setStartDate] = useState(false);
+const CheckOut = () => {
+  const [endDate, setEndDate] = useState(false);
   return (
     <div className='relative flex items-center justify-end h-full'>
       {/* icon */}
@@ -17,12 +17,15 @@ const CheckIn = () => {
         <BsCalendar className='text-accent text-base' />
       </div>
     </div>
-    <DatePicker className='w-full h-full' selected={startDate} placeholderText='Check in'
-    onChange={(date)=> setStartDate(date)}
+    <DatePicker className='w-full h-full'
+    name='dateTo'
+    id='dateTo' 
+    selected={endDate} placeholderText='Check out'
+    onChange={(date) => setEndDate(date)}
     />
   </div>
   );
   
 };
 
-export default CheckIn;
+export default CheckOut;
