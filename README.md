@@ -1,4 +1,4 @@
-# Holidayze
+# Holidaze
 Welcome to Holidaze a site for luxury AirBnB accommodations. 
 This project is final exam project from Noroff to display and showcase what i have learned the last 2 years of being a FrontEnd developer student.
 
@@ -69,8 +69,7 @@ In the project directory, you can use the following npm scripts:
 - `npm build`: Builds the production-ready optimized bundle.
 - `npm test`: Runs the test scripts.
 - `npm run eject`: Ejects the app from the create-react-app configuration.
-- `npm run cypress-test`: Runs the Cypress end-to-end tests.
-- `npm run test-e2e`: Opens the Cypress test runner for running end-to-end tests.
+
 
 ```md
 Please note that some scripts may require additional configuration or setup, 
@@ -102,3 +101,4 @@ such as the Cypress tests.
 - spinners-react
 - swiper
 - yup
+
