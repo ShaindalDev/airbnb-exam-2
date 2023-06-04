@@ -71,11 +71,6 @@ In the project directory, you can use the following npm scripts:
 - `npm run eject`: Ejects the app from the create-react-app configuration.
 
 
-```md
-Please note that some scripts may require additional configuration or setup, 
-such as the Cypress tests.
-```
-
 #### Dependencies
 
 - @@fortawesome/fontawesome-free
