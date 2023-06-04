@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { getDatesBetween } from "../js/getDatesBetween"
-import useVenues from '../hooks/useVenues';
+import React, { useState} from 'react';
+
 //datepicker
 import DatePicker from 'react-datepicker';
 //datepicker css

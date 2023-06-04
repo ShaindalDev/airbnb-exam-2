@@ -1,35 +1,13 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-
-import ChangeUserAvatar from "./UpdateAvatar";
-
-// Icons
-import {
-  ChevronDownIcon,
-  PencilSquareIcon,
-  ArrowLeftOnRectangleIcon,
-} from "@heroicons/react/20/solid";
+import React, { useEffect } from "react";
 import UpdateAvatar from "./UpdateAvatar";
-import { BsCamera } from "react-icons/bs";
-// Axios
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 //Hente all profil data i axios request i denne filen her.
 const ProfileCard = ({ name, avatar, venueManager }) => {
   const localUserData = localStorage.getItem("UserProfile");
   const userData = JSON.parse(localUserData);
 
-  const [displayForm, setShowForm] = useState(false);
-
-  const showForm = () => {
-    setShowForm(!displayForm);
-  };
-
   useEffect(() => {});
   if (!name) {
-    console.error(name);
     return <h1>There is no data available</h1>;
   }
 
@@ -52,11 +30,11 @@ const ProfileCard = ({ name, avatar, venueManager }) => {
                           aria-hidden='true'
                         ></div>
                         <img
-                          className="rounded-full"
+                          className='rounded-full'
                           src={avatar}
-                          width="82"
-                          height="82"
-                          alt="User 01"
+                          width='82'
+                          height='82'
+                          alt='User 01'
                         />
                       </a>
                       <div className='mt-1 pr-1'>
@@ -75,13 +53,11 @@ const ProfileCard = ({ name, avatar, venueManager }) => {
                       </div>
                     </div>
                   </header>
-                  {/* dotted menu*/}
                   <UpdateAvatar name={name} />
-                  
                 </div>
                 {/* profile Card content*/}
-                <div className="mt-2">
-                  <div className="text-sm">
+                <div className='mt-2'>
+                  <div className='text-sm'>
                     Here you will see an overview of your venues, your bookings
                     and you can change profile picture.
                   </div>
@@ -90,7 +66,6 @@ const ProfileCard = ({ name, avatar, venueManager }) => {
             </div>
           </div>
         </div>
-        
       </section>
     </>
   );
