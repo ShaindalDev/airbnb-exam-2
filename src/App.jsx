@@ -35,7 +35,7 @@ const App = () => {
             <Route path='/contact' element={<Contact />} />
             <Route path='/room/:id' element={<RoomDetails />} />
             <Route path='/profile' element={<Profile />} />
-            <Route path='/room/edit/:id' element={<EditVenueDetails />} />
+            <Route path='/room/:id' element={<EditVenueDetails />} />
             {/* auth protected routes, requires registered profile*/}
             <Route element={<RequireAuth />}>
               

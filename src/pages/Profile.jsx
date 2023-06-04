@@ -11,7 +11,7 @@ import MyVenues from "../components/Profile/MyVenues";
 import ProfileCard from "../components/Profile/ProfileCard";
 
 import MyBookings from "../components/Profile/MyBookings";
-import { VenueSearch } from "../hooks/searchHook";
+
 
 const Profile = () => {
   useEffect(() => {

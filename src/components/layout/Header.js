@@ -6,7 +6,7 @@ import LogoDark from "../../assets/img/logo-dark.svg";
 import LogoWhite from "../../assets/img/logo-white.svg";
 import { getLocalStorageItem } from "../../js/getStorageItems";
 import LogOut from "../../js/logOut";
-import { VenueSearch } from "../../hooks/searchHook";
+import VenueSearch from "./SearchBar/venueSearch";
 
 const Header = () => {
   const auth = useAuth();

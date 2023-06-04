@@ -67,7 +67,7 @@ const MyVenue = ({ venue }) => {
       </div>
       {/*btn */}
       <Link
-        to={`/room/edit/${id}`}
+        to={`/room/${id}`}
         className='btn btn-secondary mb-3 btn-sm max-w-[150px] mx-auto'
       >
         Edit here
