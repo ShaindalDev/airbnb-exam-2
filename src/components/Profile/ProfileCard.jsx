@@ -4,6 +4,7 @@ import UpdateAvatar from "./UpdateAvatar";
 //Hente all profil data i axios request i denne filen her.
 const ProfileCard = ({ name, avatar, venueManager }) => {
   const localUserData = localStorage.getItem("UserProfile");
+  // eslint-disable-next-line
   const userData = JSON.parse(localUserData);
 
   useEffect(() => {});

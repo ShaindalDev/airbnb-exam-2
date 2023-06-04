@@ -9,7 +9,9 @@ import axios from "../../api/axios";
 const CREATE_URL = "/venues";
 
 export default function CreateNewVenue() {
+  // eslint-disable-next-line
   const [submit, setSubmit] = useState(false);
+  // eslint-disable-next-line
   const [isError, setIsError] = useState(null);
   const [venueImage, setVenueImage] = useState([]);
 
@@ -18,15 +20,6 @@ export default function CreateNewVenue() {
     parking: false,
     breakfast: false,
     pets: false,
-  });
-
-  const [venueLocation, setVenueLocation] = useState({
-    adddress: "",
-    city: "",
-    zip: "",
-    country: "",
-    lat: 0,
-    lng: 0,
   });
 
   const handleMetaChange = (metaKey) => {
@@ -44,7 +37,7 @@ export default function CreateNewVenue() {
     description: yup
       .string()
       .required("Description is required")
-      .min(10, "Description must be atleast 10 characters"),
+      .min(10, "Description must be at least 10 characters"),
     price: yup.number().required("A price is required, must be number"),
     maxGuests: yup
       .number()
@@ -75,7 +68,7 @@ export default function CreateNewVenue() {
           price: data.price,
           maxGuests: data.maxGuests,
           meta: venueMeta,
-          location: venueLocation,
+       
         },
         {
           headers: {

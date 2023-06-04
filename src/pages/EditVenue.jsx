@@ -1,11 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-//components
-import AdultsDropdown from "../components/AdultsDropdown";
-import KidsDropdown from "../components/KidsDropdown";
-import CheckIn from "../components/CheckIn";
-import CheckOut from "../components/CheckOut";
 //scroll to component
 import ScrollToTop from "../components/ScrollToTop";
 import VenueFacilities from "../components/Venue/Facilities";

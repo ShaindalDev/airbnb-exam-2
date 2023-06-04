@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+
 //logo
 import LogoDark from "../../assets/img/logo-dark.svg";
 import LogoWhite from "../../assets/img/logo-white.svg";
@@ -9,9 +9,9 @@ import LogOut from "../../js/logOut";
 import VenueSearch from "./SearchBar/venueSearch";
 
 const Header = () => {
-  const auth = useAuth();
   const [header, setHeader] = useState(false);
   const isLoggedIn = getLocalStorageItem("isLoggedIn");
+  // eslint-disable-next-line
   const storedData = getLocalStorageItem("UserProfile");
   useEffect(() => {
     window.addEventListener("scroll", () => {
