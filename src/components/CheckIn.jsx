@@ -9,6 +9,7 @@ import '../datepicker.css';
 import { BsCalendar } from 'react-icons/bs';
 
 const CheckIn = () => {
+  // eslint-disable-next-line
   const [startDate, setStartDate] = useState(new Date);
   const onChange = (dates) => {
     // eslint-disable-next-line
