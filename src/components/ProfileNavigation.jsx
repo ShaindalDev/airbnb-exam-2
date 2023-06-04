@@ -8,6 +8,12 @@ const tabs = [
   { name: "My Venues", href: "#myVenues", current: false },
   { name: "Create New Venue", href: "#createNewVenue", current: false },
 ];
+// Future solution, sadly i didnt have time to complete this one.
+// const managerTabs = [
+//   { name: "My Profile", href: "/profile", current: true },
+//   { name: "My Bookings", href: "#myBookings", current: false },
+
+// ];
 
 function classNames(...classes) {
   
@@ -15,21 +21,23 @@ function classNames(...classes) {
 }
 
 const ProfileNavigation = () => {
+  // eslint-disable-next-line
   const auth = useAuth();
   const isLoggedIn = "isLoggedIn";
   const storedData = "UserData";
 
+
   let src = "";
-  if (isLoggedIn) src = storedData.avatar;
+  // eslint-disable-next-line
+  if (isLoggedIn === true) src = storedData.avatar;
   return (
     <>
-      {isLoggedIn ? (
+      {isLoggedIn  ? (
         <div>
           <div className="sm:hidden">
             <label htmlFor="tabs" className="sr-only">
               Select a tab
             </label>
-            {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
             <select
               id="tabs"
               name="tabs"

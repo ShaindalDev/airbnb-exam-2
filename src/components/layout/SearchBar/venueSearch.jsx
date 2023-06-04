@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function VenueSearch() {
   const [venues, setVenues] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
+// eslint-disable-next-line
   const [hasInput, setHasInput] = useState(false);
 
   useEffect(() => {

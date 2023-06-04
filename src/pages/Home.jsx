@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+
 //Components
 import Rooms from "../components/Rooms";
 import BookForm from "../components/BookForm";
 import HeroSlider from "../components/HeroSlider";
-import VenueProvider from "../context/VenueContext";
+
 
 const Home = () => {
   useEffect(() => {

@@ -19,6 +19,7 @@ const REGISTER_URL = "/auth/register";
 const RegisterForm = () => {
   const [submit, setSubmit] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  // eslint-disable-next-line
   const [checked, setChecked] = useState(false);
 
   const validationSchema = yup.object().shape({
@@ -45,6 +46,7 @@ const RegisterForm = () => {
   });
 
   const navigate = useNavigate();
+  // eslint-disable-next-line
   const [auth, setAuth] = useContext(AuthContext);
 
   // Form submit handler

@@ -5,13 +5,10 @@ import { API_URL, bookings, venues } from "../../api/constants";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { BsCalendar, BsChevronDown } from "react-icons/bs";
-import { Menu } from "@headlessui/react";
-
-const lis = [{ name: "1" }, { name: "2" }, { name: "3" }];
+import { BsCalendar } from "react-icons/bs";
 
 function CalenderBooking({ venueId }) {
-  const [guests, setGuests] = useState();
+  
   const [formData, setFormData] = useState({
     dateFrom: "",
     dateTo: "",

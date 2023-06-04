@@ -11,6 +11,7 @@ import { BsCalendar } from 'react-icons/bs';
 const CheckIn = () => {
   const [startDate, setStartDate] = useState(new Date);
   const onChange = (dates) => {
+    // eslint-disable-next-line
     const [start, end] = dates;
     setStartDate(start);
   };
@@ -25,7 +26,6 @@ const CheckIn = () => {
     <DatePicker className='w-full h-full' 
     selected={startDate} 
     onChange={onChange}
-    // excludeDates={[addDays(new Date(), 1), addDays(new Date(), 5)]}
     selectsDisabledDaysInRange
      placeholderText='Check in'
     startDate={startDate}

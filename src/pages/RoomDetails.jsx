@@ -1,11 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
-//components
-import AdultsDropdown from "../components/AdultsDropdown";
-import KidsDropdown from "../components/KidsDropdown";
-import CheckIn from "../components/CheckIn";
-import CheckOut from "../components/CheckOut";
 //scroll to component
 import ScrollToTop from "../components/ScrollToTop";
 import VenueFacilities from "../components/Venue/Facilities";
@@ -15,9 +9,6 @@ import VenueMainMedia from "../components/Venue/VenueMainMedia";
 import VenueDescription from "../components/Venue/VenueDescription";
 //context
 import { VenueContext } from "../context/VenueContext";
-import BookingCalender from "../components/BookingCalender";
-import CalenderBooking from "../components/BookingCalender";
-//icons
 
 const RoomDetails = () => {
   useEffect(() => {
@@ -38,7 +29,7 @@ const RoomDetails = () => {
   });
 
   //destructure Venues
-  const { name, description, maxGuests, meta, media, price } = venue;
+  const { name, description, maxGuests, meta, media } = venue;
   // console.log(venue.media);
 
   //destructure meta
