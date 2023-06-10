@@ -68,7 +68,7 @@ In the project directory, you can use the following npm scripts:
 
 - `npm start`: Starts the development server.
 - `npm build`: Builds the production-ready optimized bundle.
-- `npm test`: Runs the test scripts.
+- `npm test`: Runs the test scripts. *Not written any tests yet
 - `npm run eject`: Ejects the app from the create-react-app configuration.
 
 
