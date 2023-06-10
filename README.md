@@ -98,3 +98,16 @@ In the project directory, you can use the following npm scripts:
 - swiper
 - yup
 
+## Contributing
+
+If you want to contribute to this project just send me a message, and leave me a comment as a referance in your project. Feel free to message me if you want me to view your project where you have used this as a base. Do remember to fork the repo if you want to contribute to something, give me a heads up as well. 
+
+
+## Contact
+
+To contact me there is multiple places to do so
+
+[My Twitter page](www.twitter.com/noahlysa)
+
+[My LinkedIn page](https://www.linkedin.com/in/robin-johnsen-04a226159/)
+[My Page](https://johnsen-codes.no/)
