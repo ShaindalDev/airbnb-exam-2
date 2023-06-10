@@ -1,4 +1,5 @@
 # Holidaze
+![image](https://github.com/ShaindalDev/airbnb-exam-2/blob/be4cbd9891e7e37cd0aace6f2759d8672baf8169/src/assets/img/holidaze_site.png)
 Welcome to Holidaze a site for luxury AirBnB accommodations. 
 This project is final exam project from Noroff to display and showcase what i have learned the last 2 years of being a FrontEnd developer student.
 
